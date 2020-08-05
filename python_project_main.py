@@ -5,7 +5,7 @@ from pp_classes import Level
 from pp_classes import Player
 from pp_classes import Level2
 
-QUESTION_1= "SEAN_AI: Need to fix this print statement:\nprint('destroy all humans'"
+#QUESTION_1= "SEAN_AI: Need to fix this print statement:\nprint('destroy all humans'"
 #ANSWER_PROMPT = "Tell me your answer"
 
 level1= Level(QUESTION_1, "print('destroy all humans')","x = 2 + n + 4 -5")
@@ -69,7 +69,7 @@ user_catch_phrase = input(("I need to calibrate my audio receiver, what is your 
 player = Player(user_input, user_color, user_catch_phrase)
 
 while running:
-    
+    #Intro
     print("""Hello digital crafter... sorry that today is your first day. Hope you did the prework...\n
             I am SEAN, the AI that runs this place and I have just had my systems locked out. There is an enemy AI trying to crash the system.""")
     print("SEAN_AI: The system is compromised and multiple parts of the code that run DC have been corrupted. I can't reprogram myself, violates Asamov's first law, so I need you to help me by fixing the broken code. ")
