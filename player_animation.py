@@ -2,6 +2,12 @@
 import pygame
 import random
 import math
+from python_project_main import message_display
+from python_project_main import level_arr
+from python_project_main import questions_array
+from python_project_main import pause_get_key
+from python_project_main import ask
+from python_project_main import look_for_down
 #Intialize Pygame
 pygame.init()
 
@@ -24,6 +30,12 @@ playerY_change = 0
 
 #computer
 computerImg = pygame.image.load('laptop.png')
+#computer flag
+c1 = 0
+c2 = 0
+c3 = 0 
+c4 = 0
+
 
 compx = [100,400,100,400,700,700]
 compy = [100,400,400,100,100,400]
@@ -31,75 +43,20 @@ def computer ():
     screen.blit(computerImg,(compx[0],compy[0]))
     screen.blit(computerImg,(compx[1],compy[1]))
     screen.blit(computerImg,(compx[2],compy[2]))
-    screen.blit(computerImg,(compx[3],compy[3]))
-    screen.blit(computerImg,(compx[4],compy[4]))
     screen.blit(computerImg,(compx[5],compy[5]))
 
-def on_computer(playerX,playerY):
-    #checking for collision at a computer
-    collision1 = iscollision(compx[0],compy[0],playerX,playerY)
-    collision2 = iscollision(compx[1],compy[1],playerX,playerY)
-    collision3 = iscollision(compx[2],compy[2],playerX,playerY)
-    collision4 = iscollision(compx[3],compy[3],playerX,playerY)
-    collision5 = iscollision(compx[4],compy[4],playerX,playerY)
-    collision6 = iscollision(compx[5],compy[5],playerX,playerY)
-    #shows text for x and y coordinates of computer
-    if collision1:
-        
-        screen.fill((0,0,0))
-        #Background Image
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        playerX = 370
-        playerY = 480
-        # show_text(compx[0],compy[0])
-        return 1
-    elif collision2:
-        show_text(compx[1],compy[1])
-        screen.fill((0,0,0))
-        #Background Image
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        # show_text(compx[0],compy[0])
-        return 1
-    elif collision3:
-        show_text(compx[2],compy[2])
-        screen.fill((0,0,0))
-        #Background Image
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        # show_text(compx[0],compy[0])
-        return 1
-    elif collision4:
-        show_text(compx[3],compy[3])
-        screen.fill((0,0,0))
-        #Background Image
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        # show_text(compx[0],compy[0])
-        return 1
-    elif collision5:
-        show_text(compx[4],compy[4])
-        screen.fill((0,0,0))
-        #Background Image
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        # show_text(compx[0],compy[0])
-        return 1
-    elif collision6:
-        show_text(compx[5],compy[5])
-        screen.fill((0,0,0))
-        #Background Image
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        # show_text(compx[0],compy[0])
-        return 1
-    
 
 def player(x,y):
     #Drawing image to screen
     screen.blit(playerImg,(x,y))
 
-
+font = pygame.font.Font('freesansbold.ttf',18)
 def show_text(x,y):
-    text = font.render("press down to exit computer ",True,(255,255,255))
+    text = font.render("Enter Secret Code to Unlock Computer ",True,(255,255,255))
     screen.blit(text,(x,y))
+    #pause_get_key()
 
-font = pygame.font.Font('freesansbold.ttf',32)
+
 def iscollision(alienX, alienY, bulletX, bulletY):
         #distance between two coordinates
         distance = math.sqrt(math.pow(alienX-bulletX,2)+math.pow(alienY-bulletY,2))
@@ -137,7 +94,79 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or pygame.K_UP or pygame.K_DOWN:
                 playerX_change = 0
                 playerY_change = 0
-        
+
+
+
+    collision1 = iscollision(compx[0],compy[0],playerX,playerY)
+    if collision1 and c1 != 1:
+        c1 = 1
+        screen.fill((0,0,0))
+        #Background Image
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        #show_text(132,21)
+        for questions in range(len(questions_array[0])):
+            while True:
+                message_display(questions_array[0][questions].question)
+                user_input = ask(screen, "")
+                if user_input == questions_array[0][questions].answer:
+                    screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    message_display(["Woot Woot"])
+                    break
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0)) 
+                
+    collision2 = iscollision(compx[1],compy[1],playerX,playerY)
+    if collision2 and c2 != 1:
+        c2 = 1
+        screen.fill((0,0,0))
+        #Background Image
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        #show_text(132,21)
+        for questions in range(len(questions_array[0])):
+            while True:
+                message_display(questions_array[0][questions].question)
+                user_input = ask(screen, "")
+                if user_input == questions_array[0][questions].answer:
+                    screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    message_display(["Woot Woot"])
+                    break
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+    
+
+    collision3 = iscollision(compx[2],compy[2],playerX,playerY)
+    if collision3 and c3 != 1:
+        c3 = 1
+        screen.fill((0,0,0))
+        #Background Image
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        #show_text(132,21)
+        for questions in range(len(questions_array[0])):
+            while True:
+                message_display(questions_array[0][questions].question)
+                user_input = ask(screen, "")
+                if user_input == questions_array[0][questions].answer:
+                    screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    message_display(["Woot Woot"])
+                    break
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+   
+
+    collision4 = iscollision(compx[5],compy[5],playerX,playerY)
+    if collision4 and c4 != 1:
+        c4 = 1
+        screen.fill((0,0,0))
+        #Background Image
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        #show_text(132,21)
+        for questions in range(len(questions_array[0])):
+            while True:
+                message_display(questions_array[0][questions].question)
+                user_input = ask(screen, "")
+                if user_input == questions_array[0][questions].answer:
+                    screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    message_display(["Woot Woot"])
+                    break
+        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+    
 
     #drawing the player on the screen
     playerX += playerX_change
@@ -150,11 +179,8 @@ while running:
         playerY = 0#these are bondaries
     elif playerY >= 536:
         playerY = 536
-
-#This checks if player is on computer
-    flag = on_computer(playerX,playerY)
-    print(flag)
-
+   
+ 
 
 
     #function to display computer and player if the player is not on the computer
