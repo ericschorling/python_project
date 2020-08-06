@@ -218,6 +218,8 @@ asteroids = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 #all_sprites.add(player)
 
+
+
 message = f"Welcome {player.name} to the flying game."
 message1 = "Calling this loop method is going to suck"
 display_box_no_input(screen, message)
@@ -227,7 +229,7 @@ display_box_no_input(screen, message)
 #def a message display function for placing text on the screen
 #nput("Tell me something:")
 
-running = True
+#running = True
 
 
 while running:

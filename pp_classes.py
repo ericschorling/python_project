@@ -43,11 +43,57 @@ class Level():
 
 
 #character Class
-class Player():
-    def __init__(self, name, shirt_color, catch_phrase):
-        self.name = name
-        self.shirt_color = shirt_color
-        self.catch_phrase = catch_phrase
+# class Player(pygame.sprite.Sprite):
+#     def __init__(self,name, shirt_color, catch_phrase ):
+#         super(Player, self).__init__()
+#         #self.surf = pygame.Surface((75,25))
+#         #self.surf.fill((255,255,255))
+#         ##Adding a pic
+#         self.name = name
+#         self.shirt_color = shirt_color
+#         self.catch_phrase = catch_phrase
+#         self.surf = pygame.image.load("player_right.png").convert()
+#         self.surf.set_colorkey((0,0,0), RLEACCEL)
+#         self.rect = self.surf.get_rect()
+#     #moving based on keystrokes
+#     def update(self, pressed_keys):
+#         if pressed_keys[K_UP]:
+#             self.rect.move_ip(0, -5)
+#             self.surf = pygame.image.load("player_up.png").convert()
+#             self.surf.set_colorkey((0,0,0), RLEACCEL)
+#         if pressed_keys[K_DOWN]:
+#             self.rect.move_ip(0, 5)
+#             self.surf = pygame.image.load("player_down.png").convert()
+#             self.surf.set_colorkey((0,0,0), RLEACCEL)
+#         if pressed_keys[K_LEFT]:
+#             self.rect.move_ip(-5, 0)
+#             self.surf = pygame.image.load("player_left.png").convert()
+#             self.surf.set_colorkey((0,0,0), RLEACCEL)
+#         if pressed_keys[K_RIGHT]:
+#             self.rect.move_ip(5, 0)
+#             self.surf = pygame.image.load("player_right.png").convert()
+#             self.surf.set_colorkey((0,0,0), RLEACCEL)
+#         #keep player on the board
+#         #left side can't be less than the left side 0 point
+#         if self.rect.left < 0:
+#             self.rect.left = 0
+#         #rightside can't be great than the width
+#         if self.rect.right > SCREEN_WIDTH:
+#             self.rect.right = SCREEN_WIDTH
+#         #top can't be less than 0
+#         if self.rect.top <= 0:
+#             self.rect.top = 0
+#         #bottom can't go above the top
+#         if self.rect.bottom >= SCREEN_HEIGHT:
+#             self.rect.bottom = SCREEN_HEIGHT
+
+
+
+# class Player():
+#     def __init__(self, name, shirt_color, catch_phrase):
+#         self.name = name
+#         self.shirt_color = shirt_color
+#         self.catch_phrase = catch_phrase
 #add notebook class to take all the codes and store them
 #create menu class?
 #does it have any attributes? 
