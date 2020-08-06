@@ -1,3 +1,4 @@
+
 import pygame
 import random
 import math
@@ -14,8 +15,10 @@ pygame.display.set_caption("Game Name")
 
 #Player
 playerImg = pygame.image.load('hero.png')
+global playerX
 playerX = 370
-playerY = 480
+global playerY 
+playerY= 480
 playerX_change = 0
 playerY_change = 0
 
@@ -42,44 +45,50 @@ def on_computer(playerX,playerY):
     collision6 = iscollision(compx[5],compy[5],playerX,playerY)
     #shows text for x and y coordinates of computer
     if collision1:
-        show_text(compx[0],compy[0])
+        
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        playerX = 370
+        playerY = 480
+        # show_text(compx[0],compy[0])
         return 1
     elif collision2:
         show_text(compx[1],compy[1])
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        # show_text(compx[0],compy[0])
         return 1
     elif collision3:
         show_text(compx[2],compy[2])
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        # show_text(compx[0],compy[0])
         return 1
     elif collision4:
         show_text(compx[3],compy[3])
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        # show_text(compx[0],compy[0])
         return 1
     elif collision5:
         show_text(compx[4],compy[4])
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        # show_text(compx[0],compy[0])
         return 1
     elif collision6:
         show_text(compx[5],compy[5])
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        # show_text(compx[0],compy[0])
         return 1
     
-
-
 
 def player(x,y):
     #Drawing image to screen
@@ -87,7 +96,7 @@ def player(x,y):
 
 
 def show_text(x,y):
-    text = font.render("Need a blank screen ",True,(255,255,255))
+    text = font.render("press down to exit computer ",True,(255,255,255))
     screen.blit(text,(x,y))
 
 font = pygame.font.Font('freesansbold.ttf',32)
@@ -128,7 +137,7 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or pygame.K_UP or pygame.K_DOWN:
                 playerX_change = 0
                 playerY_change = 0
-           
+        
 
     #drawing the player on the screen
     playerX += playerX_change
@@ -141,8 +150,8 @@ while running:
         playerY = 0#these are bondaries
     elif playerY >= 536:
         playerY = 536
-   
-   #This checks if player is on computer
+
+#This checks if player is on computer
     flag = on_computer(playerX,playerY)
     print(flag)
 
@@ -154,3 +163,5 @@ while running:
         #function to display player
         player(playerX,playerY)
     pygame.display.update()
+
+
