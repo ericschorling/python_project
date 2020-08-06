@@ -1,28 +1,45 @@
-# Level class defines the behavior of each level and how it will be displayed during game play.
+# Level Dictionary:
+# Here are the questions for Python Project - Level Dictonaries.
 
-# class Level():
-#     def __init__(self, question, answer, secret_code):
-#         self.question = question
-#         self.answer = answer
-#         self.secret_code = secret_code
+# Switched over to sub-class question:
+class Question():
+    def __init__(self, question, answer):
+        self.question = question
+        self.answer = answer
 
-#     def ask_question(self):
-#         return self.question
+    def ask_question(self):
+        return self.question
 
-#     def prompt_for_answer(self):
+# Question: 1
 
-# class LevelDict(Level):
-#     def __init__(self, question, answer_prompt, answer, secret_code):
-#         super().__init__(question, answer_prompt, answer, secret_code)
-
-#     def ask_question(self):
-#         super().ask_question()
-#         self.question = "This is the output for the first question."
-
-# list_question_1 = Level("for i in range (o, len(arr1))___",":", 1)
+dict_question_1 = Question("computer_1 = {\n 'user': 'Sean',\n 'folder': 9,\n 'oh no': 'Enemy Found'\n}\nprint(computer_1.pop('oh no'))", "Enemy Found")
 
 
-# print(list_question_1.ask_question())
-# answer = input("What is the answer? ")
-# if answer == list_question_1.answer:
-#     print("You got it! \nThe secret code is %s" % (list_question_1.secret_code))
+def play_question_1():
+    print(dict_question_1.ask_question())
+    answer = input("What will be printed? ")
+    if answer == dict_question_1.answer:
+        print("You remembered how to use .pop, to bad it didn't defeat the evil AI.")
+    else:
+        if answer is not dict_question_1.answer:
+            print("You aren't even close, try again!")
+
+play_question_1()
+print()
+
+# Question: 2
+
+dict_question_2 = Question("player_skills = {\n   'DigitalCrafts':{\n      'programmer':{\n         'name': 'Sean',\n         'skills':{\n            'python': 70,\n            'git and github': -1,\n            'team work': 'Expert'\n         }\n       }\n     }\n   }\n print(player_skills['DigitalCrafts']['programmer']['name'])", "Sean")
+
+
+def play_question_2():
+    print(dict_question_2.ask_question())
+    answer = input("What will be printed? ")
+    if answer == dict_question_2.answer:
+        print("Yep, you are right!")
+    else:
+        if answer is not dict_question_2.answer:
+            print("No one by that name here, try again.")
+
+play_question_2()
+print()
