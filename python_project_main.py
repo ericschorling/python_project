@@ -215,11 +215,11 @@ def gen_codes(levels_in_game):
     secret_ans_array = []
     while x < levels_in_game:
         while y < random.randint(8,16):
-            code_val = random.randint(0,62)
+            code_val = random.randint(0,35)
             if code_val < 26:
                 code_string += alphabet[code_val]
-            elif code_val >= 26 and code_val < 52:
-                code_string += alphabet[code_val - 26].upper()
+            # elif code_val >= 26 and code_val < 52:
+            #     code_string += alphabet[code_val - 26].upper()
             else:
                 code_string += str(random.randint(0,9))
             y += 1
@@ -237,6 +237,7 @@ def game_level_create():
     lvl3= Level(ans_array[2])
     lvl4= Level(ans_array[3])
     level_arr = [lvl1,lvl2,lvl3, lvl4]
+    print(ans_array)
     return level_arr
 #Function to create the question objects
 def question_obj_create():
@@ -284,6 +285,7 @@ def question_obj_create():
 level_arr = game_level_create()
 questions_array =question_obj_create()
 
+
 #display the menu to prompt for the chosen computer / will remove for visual version, player interaction makes this redundant
 def menu_display():
     while True:
@@ -330,6 +332,7 @@ def look_for_down():
     while True:
         a_key = get_key()
         if a_key == K_DOWN:
+            player(0,0)
             break
 #boolean used to test when we jump into the endgame sequence
 # end_game = False

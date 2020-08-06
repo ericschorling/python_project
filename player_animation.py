@@ -6,6 +6,7 @@ from python_project_main import level_arr
 from python_project_main import questions_array
 from python_project_main import pause_get_key
 from python_project_main import ask
+from python_project_main import look_for_down
 #Intialize Pygame
 pygame.init()
 
@@ -47,11 +48,15 @@ def on_computer(playerX,playerY):
     collision6 = iscollision(compx[5],compy[5],playerX,playerY)
     #shows text for x and y coordinates of computer
     if collision1:
-        exit_comp = 1
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
+        while True:
+            user_input = ask(screen, "Enter Secret Code:")
+            if user_input == level_arr[0].secret_code:
+                message_display(["CORRECT!!"])
+                break
         for questions in range(len(questions_array[0])):
             while True:
                 message_display(questions_array[0][questions].question)
@@ -60,9 +65,12 @@ def on_computer(playerX,playerY):
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
                     break
-            screen.blit(pygame.image.load('computer_screen.png'),(0,0)) 
-            exit_comp = 0 
-        return exit_comp
+                break
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+            message_display(["You unlocked this computer!!","The next code is " + level_arr[1].secret_code])
+            pause_get_key()
+        look_for_down()
+        return 1
     elif collision2:
         #show_text(compx[1],compy[1])
         screen.fill((0,0,0))
