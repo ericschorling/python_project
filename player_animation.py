@@ -1,3 +1,4 @@
+
 import pygame
 import random
 import math
@@ -20,8 +21,10 @@ pygame.display.set_caption("Game Name")
 
 #Player
 playerImg = pygame.image.load('hero.png')
+global playerX
 playerX = 370
-playerY = 480
+global playerY 
+playerY= 480
 playerX_change = 0
 playerY_change = 0
 
@@ -41,9 +44,6 @@ def computer ():
     screen.blit(computerImg,(compx[1],compy[1]))
     screen.blit(computerImg,(compx[2],compy[2]))
     screen.blit(computerImg,(compx[5],compy[5]))
-
-
-
 
 
 def player(x,y):
