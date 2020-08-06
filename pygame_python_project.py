@@ -114,27 +114,52 @@ def get_key():
             return event.key
         else:
             pass
-
-def display_box(screen, message):
-    "Print a message in a box in the middle of the screen"
+#Method to display text to user that is used for communication. Should be changed to a class so that the computer and the written text from the AI can be output on different size rects.
+def display_box_no_input(screen, message):
+    #"Print a message in a box in the middle of the screen"
     #This sets the background for the text input. 
     fontobject = pygame.font.Font(None, 18)
     pygame.draw.rect(screen, (0, 0, 0),
                      ((screen.get_width() / 2) - 100,
-                      (screen.get_height() / 2) - 10,
-                      200, 20), 0)
+                      screen.get_height() - 60,
+                      200, 54), 0)
     pygame.draw.rect(screen, (255, 255, 255),
-                     ((screen.get_width() / 2) - 102,
-                      (screen.get_height() / 2) - 12,
-                      204, 24), 1)
+                      ((screen.get_width() / 2) - 102,
+                       screen.get_height() - 68,
+                       204, 60), 1)
     #This displays the messages
     screen.blit(fontobject.render(message, 1, (255, 255, 255)),
-                    ((screen.get_width() / 2) - 100, (screen.get_height() / 2) - (10)))
+        ((screen.get_width() / 2) - 100, screen.get_height() - 30))
             
     pygame.display.flip()
-
+    while True:
+        a_key = get_key()
+        if a_key == K_RETURN:
+            break
+#THis is used to ask for input from the user and doesn't need a key press to close
+def display_box(screen, message):
+    #"Print a message in a box in the middle of the screen"
+    #This sets the background for the text input. 
+    fontobject = pygame.font.Font(None, 18)
+    pygame.draw.rect(screen, (0, 0, 0),
+                     ((screen.get_width() / 2) - 100,
+                      screen.get_height() - 60,
+                      200, 54), 0)
+    pygame.draw.rect(screen, (255, 255, 255),
+                      ((screen.get_width() / 2) - 102,
+                       screen.get_height() - 68,
+                       204, 60), 1)
+    #This displays the messages
+    screen.blit(fontobject.render(message, 1, (255, 255, 255)),
+        ((screen.get_width() / 2) - 100, screen.get_height() - 30))
+            
+    pygame.display.flip()
+    # while True:
+    #     a_key = get_key()
+    #     if a_key == K_RETURN:
+    #         break
 def ask(screen, question): 
-    "ask(screen, question) -> answer"
+    #"ask(screen, question) -> answer"
     pygame.font.init()        
     current_string = []
     display_box(screen, question + "".join(current_string))
@@ -167,7 +192,7 @@ score = 0
 background_image = pygame.image.load('liquid.jpeg').convert()
 
 
-screen_output = ask(screen, "Solution:")
+screen_output = "Eric" #ask(screen, "Solution:")
 
 
 pygame.display.set_caption('Sky\'s the limit')
@@ -193,9 +218,11 @@ asteroids = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 #all_sprites.add(player)
 
-message = f"Welcome {player.name} to the flying game.\nHopefully this will \n wrap the text."
-
-ask(screen,message)
+message = f"Welcome {player.name} to the flying game."
+message1 = "Calling this loop method is going to suck"
+display_box_no_input(screen, message)
+#ask(screen,message)
+#ask(screen,message1)
 
 #def a message display function for placing text on the screen
 #nput("Tell me something:")
