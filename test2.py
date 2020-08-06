@@ -5,13 +5,14 @@ class Question ():
         self.answer = answer
         self.prompt = prompt
         #self.secret_code = secret_code
-    def ask_question(self):           
+    def ask_question(self, level):           
             user_answer = "none"
             while user_answer != self.answer:
-                print(self.question)
+                for line in self.question:
+                    print(line)
                 user_answer = input(self.prompt)
                 if user_answer == self.answer:
-                    print("\nYou got it!" )
+                    print(level.get_correct() )
                 elif user_answer != self.answer:
-                    print("\nTry again")
+                    print("\nzzzt.. Incorrect, Ha. Ha. Ha.")
 
