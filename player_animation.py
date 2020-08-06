@@ -1,6 +1,11 @@
 import pygame
 import random
 import math
+from python_project_main import message_display
+from python_project_main import level_arr
+from python_project_main import questions_array
+from python_project_main import pause_get_key
+from python_project_main import ask
 #Intialize Pygame
 pygame.init()
 
@@ -42,13 +47,24 @@ def on_computer(playerX,playerY):
     collision6 = iscollision(compx[5],compy[5],playerX,playerY)
     #shows text for x and y coordinates of computer
     if collision1:
-        show_text(compx[0],compy[0])
+        exit_comp = 1
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        return 1
+        #show_text(132,21)
+        for questions in range(len(questions_array[0])):
+            while True:
+                message_display(questions_array[0][questions].question)
+                user_input = ask(screen, "")
+                if user_input == questions_array[0][questions].answer:
+                    screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    message_display(["Woot Woot"])
+                    break
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0)) 
+            exit_comp = 0 
+        return exit_comp
     elif collision2:
-        show_text(compx[1],compy[1])
+        #show_text(compx[1],compy[1])
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
@@ -85,12 +101,13 @@ def player(x,y):
     #Drawing image to screen
     screen.blit(playerImg,(x,y))
 
-
+font = pygame.font.Font('freesansbold.ttf',18)
 def show_text(x,y):
-    text = font.render("Need a blank screen ",True,(255,255,255))
+    text = font.render("Enter Secret Code to Unlock Computer ",True,(255,255,255))
     screen.blit(text,(x,y))
+    #pause_get_key()
 
-font = pygame.font.Font('freesansbold.ttf',32)
+
 def iscollision(alienX, alienY, bulletX, bulletY):
         #distance between two coordinates
         distance = math.sqrt(math.pow(alienX-bulletX,2)+math.pow(alienY-bulletY,2))
@@ -116,13 +133,13 @@ while running:
         #if a keystroke is pressed check whether right or left 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -1#speed of change
+                playerX_change = -5#speed of change
             if event.key == pygame.K_RIGHT:
-                playerX_change = 1
+                playerX_change = 5
             if event.key == pygame.K_UP:
-                playerY_change = -1
+                playerY_change = -5
             if event.key == pygame.K_DOWN:
-                playerY_change = 1
+                playerY_change = 5
 
         if event.type ==  pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or pygame.K_UP or pygame.K_DOWN:
@@ -145,7 +162,6 @@ while running:
    #This checks if player is on computer
     flag = on_computer(playerX,playerY)
     print(flag)
-
 
 
     #function to display computer and player if the player is not on the computer
