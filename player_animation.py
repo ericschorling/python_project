@@ -6,6 +6,7 @@ from python_project_main import level_arr
 from python_project_main import questions_array
 from python_project_main import pause_get_key
 from python_project_main import ask
+from python_project_main import look_for_down
 #Intialize Pygame
 pygame.init()
 
