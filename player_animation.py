@@ -100,73 +100,103 @@ while running:
     collision1 = iscollision(compx[0],compy[0],playerX,playerY)
     if collision1 and c1 != 1:
         c1 = 1
+        #used to make it easier to c/p the different comps 
+        x = 0
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
-        for questions in range(len(questions_array[0])):
+        while True:
+            user_input = ask(screen, "Enter Secret Code:")
+            if user_input == level_arr[x].secret_code:
+                message_display(["CORRECT!!"])
+                break
+        for questions in range(len(questions_array[x])):
             while True:
-                message_display(questions_array[0][questions].question)
+                message_display(questions_array[x][questions].question)
                 user_input = ask(screen, "")
-                if user_input == questions_array[0][questions].answer:
+                if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
                     break
-            screen.blit(pygame.image.load('computer_screen.png'),(0,0)) 
-                
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+            message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])    
+            pause_get_key()
+
     collision2 = iscollision(compx[1],compy[1],playerX,playerY)
     if collision2 and c2 != 1:
         c2 = 1
+        x = 1
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
-        for questions in range(len(questions_array[0])):
+        while True:
+            user_input = ask(screen, "Enter Secret Code:")
+            if user_input == level_arr[x].secret_code:
+                message_display(["CORRECT!!"])
+                break
+        for questions in range(len(questions_array[x])):
             while True:
-                message_display(questions_array[0][questions].question)
+                message_display(questions_array[x][questions].question)
                 user_input = ask(screen, "")
-                if user_input == questions_array[0][questions].answer:
+                if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
                     break
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-    
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+            message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])    
+            pause_get_key()
 
     collision3 = iscollision(compx[2],compy[2],playerX,playerY)
     if collision3 and c3 != 1:
         c3 = 1
+        x = 2
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
-        for questions in range(len(questions_array[0])):
+        while True:
+            user_input = ask(screen, "Enter Secret Code:")
+            if user_input == level_arr[x].secret_code:
+                message_display(["CORRECT!!"])
+                break
+        for questions in range(len(questions_array[x])):
             while True:
-                message_display(questions_array[0][questions].question)
+                message_display(questions_array[x][questions].question)
                 user_input = ask(screen, "")
-                if user_input == questions_array[0][questions].answer:
+                if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
                     break
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-   
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+            message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])    
+            pause_get_key()
 
     collision4 = iscollision(compx[5],compy[5],playerX,playerY)
     if collision4 and c4 != 1:
         c4 = 1
+        x = 3
         screen.fill((0,0,0))
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
-        for questions in range(len(questions_array[0])):
+        while True:
+            user_input = ask(screen, "Enter Secret Code:")
+            if user_input == level_arr[x].secret_code:
+                message_display(["CORRECT!!"])
+                break
+        for questions in rangegit s(len(questions_array[x])):
             while True:
-                message_display(questions_array[0][questions].question)
+                message_display(questions_array[x][questions].question)
                 user_input = ask(screen, "")
-                if user_input == questions_array[0][questions].answer:
+                if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
                     break
-        screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-    
+            screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+            message_display(["You unlocked this computer!!","The next code is 42"])    
+            pause_get_key()
 
     #drawing the player on the screen
     playerX += playerX_change

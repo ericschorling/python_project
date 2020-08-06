@@ -255,11 +255,11 @@ def question_obj_create():
     dict_question_1 = Question(["computer_1 = {"," 'user': 'Sean',"," 'folder': 9,"," 'oh no': 'enemy found'","}","print(computer_1.pop('oh no'))"], "enemy found", LVL_1_PROMPT)
     dict_question_2 = Question(["player_skills = {","   'DigitalCrafts':{","      'programmer':{","         'name': 'sean',","         'skills':{","            'python': 70,","            'git and github': -1,","            'team work': 'Expert'","         }","       }","     }","   }"," print(player_skills['DigitalCrafts']['programmer']['name'])"], "sean","Last broken code\n")
     lvl1_ques_arr = [list_question_1,
-    # , list_question_2,list_question_3, dict_question_1, dict_question_2
+     list_question_2,list_question_3, dict_question_1, dict_question_2
     ]
 
     #level 2 question initialization
-    boolean_q_1 = Question(("if x = 100","    print(\"password\")","else:",    "print(\"you fail\")"), "if x == 100:", LVL_2_PROMPT)
+    boolean_q_1 = Question(("if x = 100","    print(\"password\")","else:",    "print(\"you fail\")"), "if x == 100;", LVL_2_PROMPT)
     lvl2_ques_arr = [boolean_q_1]
     #level 3 question initialization
     looper_q_1 = Question(("for x in stuff:", "print(stuff[x])", "x += 1"), "line 3", LVL_4_PROMPT)
@@ -268,9 +268,9 @@ def question_obj_create():
     #Level 4 questions initialized
     question1 = Question(["___ add(num1, num2):","   return num1 + num2"],"def",LVL_4_PROMPT)
     question2 = Question(["def add(num1_ num2):","   return num1 + num2"],",",LVL_4_PROMPT)
-    question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"(",LVL_4_PROMPT)
-    question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],")",LVL_4_PROMPT)
-    question5 = Question(("\ndef add(num1, num2)_","  return num1 + num2"),":",LVL_4_PROMPT)
+    question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"[",LVL_4_PROMPT)#won't work
+    question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],"]",LVL_4_PROMPT)#won't work
+    question5 = Question(("\ndef add(num1, num2)_","  return num1 + num2"),";",LVL_4_PROMPT)#won't work
     question6 = Question(("\ndef add(num1, num2):"," ____return num1 + num2"),"    ",LVL_4_PROMPT)
     question7 = Question(("\ndef add(num1, num2)_","  ______ num1 + num2\n"),"return",LVL_4_PROMPT)
     question8 = Question(("\ndef add(__________):","    return num1 + num2\n"),"num1, num2",LVL_4_PROMPT)
