@@ -22,7 +22,7 @@ pygame.mixer.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 screenImg = pygame.image.load("Game_Board.png").convert()
-narration_box = Message_Box(20, 400, 50 )    
+narration_box = Message_Box(20, 470, 70 )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -90,7 +90,7 @@ def iscollision(alienX, alienY, bulletX, bulletY):
 
 #Game Loop
 running = True
-end_game = True
+end_game = False
 game_over = False
 first_run = True
 flag = 0 #DON"T EVER CHANGE THIS
@@ -298,7 +298,7 @@ while running:
                 user_input = ask(screen, "")
                 if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-                    message_display(["Woot Woot"])
+                    #message_display(["Woot Woot"])
                     break
             screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
@@ -327,7 +327,9 @@ while running:
         player(playerX,playerY)
         if first_run:
             #narration_box.display_background(BLACK_BACKGROUND,300,100)
-            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David....."," Can anyone hear me? [ENTER]"])
+            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David.....","If you can hear me press [ENTER]"])
+            pause_get_key()
+            narration_box.message_display(["I am currently under attack by an enemy AI.","Four of my databases have been compromised.","Proceed to upstairs to fix the first computer"])
             pause_get_key()
             first_run = False
     pygame.display.update()

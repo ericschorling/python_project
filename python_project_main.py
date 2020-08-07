@@ -28,8 +28,6 @@ TOTAL_LEVELS = 4
 
 pygame.init()
 
-
-
 ##Pygame functions and Constants
 # Screen Constants
 SCREEN_WIDTH = 800
@@ -84,45 +82,11 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = SCREEN_HEIGHT
 #Creates the player person
 #player constants
-playerImg = pygame.image.load('hero.png')
-playerX = 370
-playerY = 480
-playerX_change = 0
-playerY_change = 0
-#player function
-#redundant?
-# def player(x,y):
-#     screen.blit(playerImg,(x,y))
-#create and place computers on screen
-# def player_move(pyx, pyy, pyx_change, pyy_change):
-#     pyx += pyx_change
-#     pyy += pyy_change
-#     if pyx <= 0:
-#         pyx = 0#these are bondaries
-#     elif pyx >= 736:#Subtract 800-64, 64 is size of our hero, 800 is our window
-#         pyx = 736
-#     if pyy <= 0:
-#         pyy = 0#these are bondaries
-#     elif pyy >= 536:
-#         pyy = 536
-#     screen.blit(playerImg, (pyx, pyy))
-
-# def computer():
-#     computerImg = pygame.image.load('laptop.png')
-#     screen.blit(computerImg,(100,100))
-#     screen.blit(computerImg,(400,400))
-#     screen.blit(computerImg,(100,400))
-#     screen.blit(computerImg,(400,100))
-#     screen.blit(computerImg,(700,100))
-#     screen.blit(computerImg,(700,400))
-
-#Displays messages
-#passed in as an array of strings
-##Add in message class to better collect and display messages. 
-#Class defines methods that allow for display and getting text
-#also include interactino like pause key
-#can take or be initialized with coordinates***
-#Takes information about the text box
+# playerImg = pygame.image.load('hero.png')
+# playerX = 370
+# playerY = 480
+# playerX_change = 0
+# playerY_change = 0
 
 class Message_Box():
     def __init__(self, font_size, x_cord, y_cord):
@@ -142,6 +106,7 @@ class Message_Box():
         for line in question1:
             self.display_text(screen,line, self.x_cord, (self.y_cord + x)  )
             x += self.font_size
+    
     def display_text(self,screen, message,x_cord, y_cord):
         fontobject = pygame.font.Font(None, self.font_size)
         #displays transparent unless display_background is called
@@ -324,10 +289,14 @@ def question_obj_create():
     ]
 
     #level 2 question initialization
-    boolean_q_1 = Question(("if x = 100","    print(\"password\")","else:",    "print(\"you fail\")"), "if x == 100;", LVL_2_PROMPT)
-    lvl2_ques_arr = [boolean_q_1]
+    boolean_q_1 = Question(["if x __ 100:","    print(\"code\")","else:",    "print(\"you fail\")"], "==", LVL_2_PROMPT)
+    boolean_q_2 = Question(["if x == 100:","    print(\"code\")","____:",    "print(\"you fail\")"], "else", LVL_2_PROMPT)
+    boolean_q_3 = Question(["if x == 100:","    print(\"code\")","___ x > 100:","    print(\"try again\")","else:",    "print(\"you fail\")"], "elif", LVL_2_PROMPT)
+    boolean_q_4 = Question(["if x == 100:","    print(\"code\")","elif x > 100:","____print(\"try again\")","else:",    "print(\"you fail\")"], "    ", LVL_2_PROMPT)
+    boolean_q_5 = Question(["if AI == 'Evil':","    print(\"foiled\")","elif x > 100:","    print(\"try again\")","else:",    "print(\"you fail\")","AI = Evil"], "foiled", LVL_2_PROMPT)
+    lvl2_ques_arr = [boolean_q_1, boolean_q_2, boolean_q_3, boolean_q_4, boolean_q_5]
     #level 3 question initialization
-    looper_q_1 = Question(("for x in stuff:", "print(stuff[x])", "x += 1"), "line 3", LVL_4_PROMPT)
+    looper_q_1 = Question(["for x in stuff:", "print(stuff[x])", "x += 1"], "line 3", LVL_4_PROMPT)
     lvl3_ques_arr = [looper_q_1]
 
     #Level 4 questions initialized
@@ -335,15 +304,15 @@ def question_obj_create():
     question2 = Question(["def add(num1_ num2):","   return num1 + num2"],",",LVL_4_PROMPT)
     question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"[",LVL_4_PROMPT)#won't work
     question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],"]",LVL_4_PROMPT)#won't work
-    question5 = Question(("\ndef add(num1, num2)_","  return num1 + num2"),";",LVL_4_PROMPT)#won't work
-    question6 = Question(("\ndef add(num1, num2):"," ____return num1 + num2"),"    ",LVL_4_PROMPT)
-    question7 = Question(("\ndef add(num1, num2)_","  ______ num1 + num2\n"),"return",LVL_4_PROMPT)
-    question8 = Question(("\ndef add(__________):","    return num1 + num2\n"),"num1, num2",LVL_4_PROMPT)
-    question9 = Question(("\ndef add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)\n"),"add",LVL_4_PROMPT)
+    question5 = Question(["\ndef add(num1, num2)_","  return num1 + num2"],";",LVL_4_PROMPT)#won't work
+    question6 = Question(["\ndef add(num1, num2):"," ____return num1 + num2"],"    ",LVL_4_PROMPT)
+    question7 = Question(["\ndef add(num1, num2)_","  ______ num1 + num2\n"],"return",LVL_4_PROMPT)
+    question8 = Question(["\ndef add(__________):","    return num1 + num2\n"],"num1, num2",LVL_4_PROMPT)
+    question9 = Question(["\ndef add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)\n"],"add",LVL_4_PROMPT)
     lvl4_ques_arr = [ question1, question2, question3, question4, question5, question6, question7,question8, question9]
 
     #endgame question
-    final_question = Question(("class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"),"self","Who can truly be the hero...? ")
+    final_question = Question(["class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"],"self","Who can truly be the hero...? ")
     end_game_q = [final_question]
     #Array for all the question arrays
     questions_array=[lvl1_ques_arr, lvl2_ques_arr, lvl3_ques_arr, lvl4_ques_arr, end_game_q]
@@ -354,22 +323,22 @@ questions_array =question_obj_create()
 
 
 #display the menu to prompt for the chosen computer / will remove for visual version, player interaction makes this redundant
-def menu_display():
-    while True:
-        menu_number = 4
-        for i in range(menu_number):
-            print(f"Computer {(i+1)}")
-        try:
-            comp_choice=int(input("Which computer would you like to check out? [1-5]"))
-        except:
-            print("Select computers by number")
-        if comp_choice < 6 and comp_choice > 0:
-            return comp_choice - 1
-        elif (comp_choice == 42):
-            print("You've entered the end game!!")
-            return comp_choice
-        else:
-            print("Please select computers 1-5. ")
+# def menu_display():
+#     while True:
+#         menu_number = 4
+#         for i in range(menu_number):
+#             print(f"Computer {(i+1)}")
+#         try:
+#             comp_choice=int(input("Which computer would you like to check out? [1-5]"))
+#         except:
+#             print("Select computers by number")
+#         if comp_choice < 6 and comp_choice > 0:
+#             return comp_choice - 1
+#         elif (comp_choice == 42):
+#             print("You've entered the end game!!")
+#             return comp_choice
+#         else:
+#             print("Please select computers 1-5. ")
 
 def computer_interaction(question_arr, level_arr, computer_num):
     while True:
@@ -388,7 +357,8 @@ def computer_interaction(question_arr, level_arr, computer_num):
             code_entered = ''
             if try_again.lower() != 'y':
                 break 
-#Unnecessary?
+
+
 def pause_get_key():
     while True:
         a_key = get_key()
