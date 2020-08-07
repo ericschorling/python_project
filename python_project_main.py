@@ -260,8 +260,8 @@ def ask(screen, question):
             break
         # elif inkey == K_MINUS:
         #     current_string.append("_")
-        elif inkey == K_DOWN:
-            player(playerX - 10, playerY - 10)
+        # elif inkey == K_DOWN:
+        #     player(playerX - 10, playerY - 10)
         elif inkey <= 127:
             current_string.append(chr(inkey))
         display_box(screen, question + ": " + "".join(current_string),139,291)
@@ -392,11 +392,8 @@ def pause_get_key():
         a_key = get_key()
         if a_key == K_RETURN:
             break        
-def pause_get_mouse():
-    while True:
-        event = pygame.event.get()
-        if event == pygame.MOUSEBUTTONDOWN:
-            break
+# def pause_get_mouse():
+
 # def look_for_down():
 #     while True:
 #         a_key = get_key()
