@@ -158,16 +158,18 @@ class Message_Box():
         #"ask(screen, question) -> answer"
         #pygame.font.init()        
         current_string = []
-        display_box(screen, question + "".join(current_string),139,291)
+        self.display_text(screen, question + "".join(current_string),139,291)
         while 1:
             inkey = get_key()
             if inkey == K_BACKSPACE:
                 current_string = current_string[0:-1]
             elif inkey == K_RETURN:
                 break
+            elif inkey == K_ESCAPE:
+                break
             elif inkey <= 127:
                 current_string.append(chr(inkey))
-            display_box(screen, question + ": " + "".join(current_string),139,291)
+            self.display_text(screen, question + ": " + "".join(current_string),139,291)
         return "".join(current_string)
 
 def game_intro():

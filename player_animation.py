@@ -17,8 +17,8 @@ pygame.init()
 pygame.font.init()
 pygame.mixer.init()
 
-pygame.mixer.music.load("2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav")
-pygame.mixer.music.play(loops=-1)
+#pygame.mixer.music.load("2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav")
+#pygame.mixer.music.play(loops=-1)
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 screenImg = pygame.image.load("Game_Board.png").convert()
@@ -47,14 +47,15 @@ c3 = 0
 c4 = 0
 c5 = 0
 
+#remove
 def button(x,y,w,h):
-    #mouse = pygame.mouse.get_pos()
+    mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     # #Takes width, height and location(x,y)
     while True:
         #if 357+122 > mouse[0] > 357 and 480+33 > mouse[1] > 480:
         if click[0] == 1:
-            print(click)
+            print(mouse)
             break
 
 compx = [72,80,400,650,400]
@@ -92,7 +93,8 @@ running = True
 end_game = True
 game_over = False
 first_run = True
-flag = 0
+flag = 0 #DON"T EVER CHANGE THIS
+
 
 introImg = pygame.image.load("Game_Opening_Screen.png").convert()
 screen.blit(introImg,(0,0))
