@@ -22,7 +22,7 @@ narration_box = Message_Box(20, 400, 50 )
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
-pygame.display.set_caption("Game Name")
+pygame.display.set_caption("Sean vs AI!")
 
 #Player
 playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
@@ -36,6 +36,7 @@ playerY_change = 0
 BLACK_BACKGROUND = (0,0,0)
 #computer change to have a number for each one
 computerImg = pygame.image.load('laptop.png')
+bossImg = pygame.image.load('Final_Computer.png')
 #computer flag
 c1 = 0
 c2 = 0
@@ -44,7 +45,7 @@ c4 = 0
 c5 = 0
 
 compx = [72,80,400,650,400]
-compy = [113,368,368,368,200]
+compy = [113,368,368,368,108]
 def computer (end_game):
     
     screen.blit(computerImg,(compx[0],compy[0]))
@@ -52,7 +53,7 @@ def computer (end_game):
     screen.blit(computerImg,(compx[2],compy[2]))
     screen.blit(computerImg,(compx[3],compy[3]))
     #add endgame computer image only when endgame is triggered.
-    if end_game: screen.blit(computerImg,(compx[4],compy[4]))
+    if end_game: screen.blit(bossImg,(compx[4],compy[4]))
 
 def player(x,y):
     #Drawing image to screen
@@ -113,7 +114,7 @@ while running:
                 playerImg = pygame.image.load("Sean_Float_Up.png").convert_alpha()
             if event.key == pygame.K_DOWN:
                 playerY_change = 4
-                playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
+                playerImg = pygame.image.load("Sean_Down.png").convert_alpha()
 
         if event.type ==  pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
@@ -127,7 +128,7 @@ while running:
                 playerY_change = 0
 
             if event.key == pygame.K_UP:
-                playerImg = pygame.image.load("Sean_Float_Up_Alt.png").convert_alpha()
+                # playerImg = pygame.image.load("Sean_Float_Up_Alt.png").convert_alpha()
                 playerX_change = 0
                 playerY_change = 0
 
