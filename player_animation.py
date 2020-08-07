@@ -23,9 +23,9 @@ pygame.display.set_caption("Game Name")
 #Player
 playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
 global playerX
-playerX = 370
+playerX = 175
 global playerY 
-playerY= 480
+playerY= 345
 playerX_change = 0
 playerY_change = 0
 
@@ -275,13 +275,13 @@ while running:
     playerX += playerX_change
     playerY += playerY_change
     if playerX <= 0:
-        playerX = 0#these are bondaries
-    elif playerX >= 736:#Subtract 800-64, 64 is size of our hero, 800 is our window
-        playerX = 736
+        playerX = 0 
+    elif playerX >= 625: 
+        playerX = 625
     if playerY <= 0:
-        playerY = 0#these are bondaries
-    elif playerY >= 536:
-        playerY = 536
+        playerY = 0 
+    elif playerY >= 345:
+        playerY = 345
    
  
 
