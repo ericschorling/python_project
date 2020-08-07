@@ -40,6 +40,7 @@ playerY_change = 0
 BLACK_BACKGROUND = (0,0,0)
 #computer change to have a number for each one
 computerImg = pygame.image.load('laptop.png')
+computerImg_Comp = pygame.image.load('Computer_Completed.png')
 bossImg = pygame.image.load('Final_Computer.png')
 #computer flag
 c1 = 0
@@ -63,7 +64,7 @@ compx = [72,80,400,650,400]
 compy = [113,368,368,368,108]
 def computer (end_game):
     
-    screen.blit(computerImg,(compx[0],compy[0]))
+    if c1 != 1 : screen.blit(computerImg,(compx[0],compy[0])) | screen.blit(computerImg_Comp,(compx[0],compy[0]))  
     screen.blit(computerImg,(compx[1],compy[1]))
     screen.blit(computerImg,(compx[2],compy[2]))
     screen.blit(computerImg,(compx[3],compy[3]))
