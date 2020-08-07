@@ -8,9 +8,12 @@ from python_project_main import level_arr
 from python_project_main import questions_array
 from python_project_main import pause_get_key
 from python_project_main import ask
-
+from python_project_main import game_intro
+#from python_project_main import look_for_down
+#from python_project_main import pause_get_mouse
 #Intialize Pygame
 pygame.init()
+
 pygame.font.init()
 pygame.mixer.init()
 
@@ -18,32 +21,28 @@ pygame.mixer.init()
 #pygame.mixer.music.play(loops=-1)
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
-
+screenImg = pygame.image.load("Game_Board.png").convert()
 narration_box = Message_Box(20, 470, 70 )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
 pygame.display.set_caption("Sean vs AI!")
 
-#Player and initial player position
+#Player
+playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
+computer_screen_Img = pygame.image.load("computer_screen.png")
+global playerX
 playerX = 175
+global playerY 
 playerY= 345
 playerX_change = 0
 playerY_change = 0
-
-#Black background for screen
 BLACK_BACKGROUND = (0,0,0)
-
-#Image file variables
+#computer change to have a number for each one
 computerImg = pygame.image.load('laptop.png')
 computerImg_Comp = pygame.image.load('Computer_Completed.png')
 bossImg = pygame.image.load('Final_Computer.png').convert_alpha()
 text_box_image = pygame.image.load('Text_Box.png').convert_alpha()
-screenImg = pygame.image.load("Game_Board.png").convert()
-playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
-computer_screen_Img = pygame.image.load("computer_screen.png")
-introImg = pygame.image.load("Game_Opening_Screen.png").convert()
-
 #computer flag
 c1 = 0
 c2 = 0
@@ -51,10 +50,19 @@ c3 = 0
 c4 = 0
 c5 = 0
 
-# computer position arrays
+#remove
+def button(x,y,w,h):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    # #Takes width, height and location(x,y)
+    while True:
+        #if 357+122 > mouse[0] > 357 and 480+33 > mouse[1] > 480:
+        if click[0] == 1:
+            print(mouse)
+            break
+
 compx = [72,80,400,650,400]
 compy = [113,368,368,368,108]
-
 def computer (end_game):
     
     if c1 != 1 : 
@@ -65,18 +73,22 @@ def computer (end_game):
         screen.blit(computerImg,(compx[1],compy[1]))
     else:
         screen.blit(computerImg_Comp,(compx[1],compy[1]))
-    #finish if/else for new image
     screen.blit(computerImg,(compx[2],compy[2]))
     screen.blit(computerImg,(compx[3],compy[3]))
     #add endgame computer image only when endgame is triggered.
     if end_game: screen.blit(bossImg,(compx[4],compy[4]))
 
-#player draw and coordinates 
 def player(x,y):
     #Drawing image to screen
     screen.blit(playerImg,(x,y))
 
-#Test to see if the computer is touched by player
+font = pygame.font.Font('freesansbold.ttf',18)
+def show_text(x,y):
+    text = font.render("Enter Secret Code to Unlock Computer ",True,(255,255,255))
+    screen.blit(text,(x,y))
+    #pause_get_key()
+
+
 def iscollision(alienX, alienY, bulletX, bulletY):
         #distance between two coordinates
         distance = math.sqrt(math.pow(alienX-bulletX,2)+math.pow(alienY-bulletY,2))
@@ -85,23 +97,30 @@ def iscollision(alienX, alienY, bulletX, bulletY):
         else:
             return False
 
-#Game Loop tests
+#Game Loop
 running = True
 end_game = False
+game_over = False
 first_run = True
 flag = 0 #DON"T EVER CHANGE THIS
 
-#Display opening card
+
+introImg = pygame.image.load("Game_Opening_Screen.png").convert()
 screen.blit(introImg,(0,0))
 narration_box.message_display([""])
+#game_intro()
 pause_get_key()
+#button(357,480,122,33)
 
-#Start the game
-while running:    
+while running:
+    #os.system("aplay 2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav&")
+
+    
 
     if flag != 1:
         #Background Color (RGB Values)
         screen.blit(screenImg,(0,0))
+        #screen.fill((44,2,38))
 
     #Gets events from inside the Pygame screen
     for event in pygame.event.get():
@@ -136,6 +155,7 @@ while running:
                 playerY_change = 0
 
             if event.key == pygame.K_UP:
+                # playerImg = pygame.image.load("Sean_Float_Up_Alt.png").convert_alpha()
                 playerX_change = 0
                 playerY_change = 0
 
@@ -144,16 +164,18 @@ while running:
                 playerX_change = 0
                 playerY_change = 0
 
-    #Starts interaction with different computers
+
+
     collision1 = iscollision(compx[0],compy[0],playerX,playerY)
     if collision1 and c1 != 1:
         c1 = 1
         #used to make it easier to c/p the different comps 
         x = 0
         print(x)
-        #screen.fill(BLACK_BACKGROUND)
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+        #show_text(132,21)
         while True:
             message_display([f"David_AI: I got the first code, try {level_arr[x].secret_code}"])
             user_input = ask(screen, "Enter Secret Code")
@@ -167,7 +189,8 @@ while running:
                 message_display(questions_array[x][questions].question)
                 user_input = ask(screen, questions_array[x][questions].prompt)
                 if user_input == questions_array[x][questions].answer:
-                    # screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    message_display(["Woot Woot"])
                     break
             screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
@@ -267,6 +290,7 @@ while running:
         c5 = 1
         x = 4
         print(x)
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
@@ -283,12 +307,13 @@ while running:
                 user_input = ask(screen, "")
                 if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
+                    #message_display(["Woot Woot"])
                     break
             screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         message_display(["You have defeated the evil AI and restored Digital Crafts!!"])    
         pause_get_key()
-    
+        game_over = True
     #drawing the player on the screen
     playerX += playerX_change
     playerY += playerY_change

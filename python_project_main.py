@@ -1,11 +1,5 @@
-#This will be the main game file.
-#class level that will be the parent for all the levels 
-#import statements.
-#Pulls in random for x
-#pulls in classes defined in PP_Classes used for questions and levels
 import random
 from pp_classes import Level
-#from pp_classes import Player
 from test2 import Question
 import pygame
 import pygame.font
@@ -13,18 +7,10 @@ import pygame.event
 import pygame.draw
 import os
 import sys
-#from player_animation import on_computer
 from pygame.locals import * 
 
-#QUESTION_1= "SEAN_AI: Need to fix this print statement:\nprint('destroy all humans'"
-#ANSWER_PROMPT = "Tell me your answer"
-# questions initialized
+
 TOTAL_LEVELS = 4
-# alphabet = "abcdefghijklmnopqrstuvwxyz"
-# x = 0
-# y = 0
-# code_string = ""
-# secret_ans_array = []
 
 pygame.init()
 
@@ -34,59 +20,6 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 # Set screen for game and create clock variable for timing.
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Digital Mayhem")
-clock = pygame.time.Clock()
-##play class, may be unused, delete if so
-class Player(pygame.sprite.Sprite):
-    def __init__(self,name, shirt_color, catch_phrase ):
-        super(Player, self).__init__()
-        #self.surf = pygame.Surface((75,25))
-        #self.surf.fill((255,255,255))
-        ##Adding a pic
-        self.name = name
-        self.shirt_color = shirt_color
-        self.catch_phrase = catch_phrase
-        self.surf = pygame.image.load("hero.png").convert()
-        self.surf.set_colorkey((0,0,0), RLEACCEL)
-        self.rect = self.surf.get_rect()
-    #moving based on keystrokes
-    def update(self, pressed_keys):
-        if pressed_keys[K_UP]:
-            self.rect.move_ip(0, -5)
-            self.surf = pygame.image.load("player_up.png").convert()
-            self.surf.set_colorkey((0,0,0), RLEACCEL)
-        if pressed_keys[K_DOWN]:
-            self.rect.move_ip(0, 5)
-            self.surf = pygame.image.load("player_down.png").convert()
-            self.surf.set_colorkey((0,0,0), RLEACCEL)
-        if pressed_keys[K_LEFT]:
-            self.rect.move_ip(-5, 0)
-            self.surf = pygame.image.load("player_left.png").convert()
-            self.surf.set_colorkey((0,0,0), RLEACCEL)
-        if pressed_keys[K_RIGHT]:
-            self.rect.move_ip(5, 0)
-            self.surf = pygame.image.load("player_right.png").convert()
-            self.surf.set_colorkey((0,0,0), RLEACCEL)
-        #keep player on the board
-        #left side can't be less than the left side 0 point
-        if self.rect.left < 0:
-            self.rect.left = 0
-        #rightside can't be great than the width
-        if self.rect.right > SCREEN_WIDTH:
-            self.rect.right = SCREEN_WIDTH
-        #top can't be less than 0
-        if self.rect.top <= 0:
-            self.rect.top = 0
-        #bottom can't go above the top
-        if self.rect.bottom >= SCREEN_HEIGHT:
-            self.rect.bottom = SCREEN_HEIGHT
-#Creates the player person
-#player constants
-# playerImg = pygame.image.load('hero.png')
-# playerX = 370
-# playerY = 480
-# playerX_change = 0
-# playerY_change = 0
 
 class Message_Box():
     def __init__(self, font_size, x_cord, y_cord):
@@ -136,15 +69,6 @@ class Message_Box():
                 current_string.append(chr(inkey))
             self.display_text(screen, question + ": " + "".join(current_string),139,291)
         return "".join(current_string)
-
-def game_intro():
-    intro = True
-    while intro:
-        for event in pygame.event.get():
-            print(event)
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
 
 
 def message_display(question1):
@@ -233,22 +157,25 @@ def ask(screen, question):
             current_string.append(chr(inkey))
         display_box(screen, question + ": " + "".join(current_string),139,291)
     return "".join(current_string)
-
+def pause_get_key():
+    while True:
+        a_key = get_key()
+        if a_key == K_RETURN:
+            break  
+     
 #non-pygame functions used to house and display the level content
 #random game code generator
 def gen_codes(levels_in_game):
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    alphabet = "abcdefghijkmnopqrstuvwxyz"
     x = 0
     y = 0
     code_string = ""
     secret_ans_array = []
     while x < levels_in_game:
-        while y < random.randint(8,16):
-            code_val = random.randint(0,35)
-            if code_val < 26:
+        while y < random.randint(4,6):
+            code_val = random.randint(0,34)
+            if code_val < 25:
                 code_string += alphabet[code_val]
-            # elif code_val >= 26 and code_val < 52:
-            #     code_string += alphabet[code_val - 26].upper()
             else:
                 code_string += str(random.randint(0,9))
             y += 1
@@ -258,6 +185,7 @@ def gen_codes(levels_in_game):
         x += 1
     return secret_ans_array
 #function to create the game levels
+#Worth removing
 def game_level_create():
     #Create the level objects that carry the random encouragement and the secret answer
     ans_array = gen_codes(TOTAL_LEVELS)
@@ -297,10 +225,10 @@ def question_obj_create():
     lvl2_ques_arr = [boolean_q_1, boolean_q_2, boolean_q_3, boolean_q_4, boolean_q_5]
     
     #level 3 question initialization
-    q1 = Question(["________ = [1,2,3,4,5,6,7,8,9,10]", "for i in num_list:" ,"    print(num_list[i])"], "num_list",LVL_4_PROMPT)
-    q2 = Question(["extended_numlist = [0,1,2,3,4,Done!]", "for i in num_list:" ,"  _________________________  "], "print(extended_numlist",LVL_4_PROMPT)
-    q3 = Question(["colors_list = [blue, yello, green, red, purple]", "____________________" ,"    print(color_list[i])"], "for i in color_list:",LVL_4_PROMPT)
-    q4 = Question(["computer_list = [Monitor, Motherboard, CPU, Hard Drive]", "for _ in computer_list:" ,"    print(computer_list[i])"], "i",LVL_4_PROMPT)
+    q1 = Question(["________ = [1,2,3,4,5,6,7,8,9,10]", "for i in num-list:" ,"    print(num-list[i])"], "num-list",LVL_4_PROMPT)
+    q2 = Question(["extended_numlist = [0,1,2,3,4,Done!]", "for i in num-list:" ,"  print(___________________)  "], "extended-numlist",LVL_4_PROMPT)
+    q3 = Question(["colors-list = [blue, yellow, green, red, purple]", "____________________" ,"    print(color-list[i])"], "for i in color-list",LVL_4_PROMPT)
+    q4 = Question(["computer-list = [Monitor, Motherboard, CPU, Hard Drive]", "for _ in computer-list:" ,"    print(computer-list[i])"], "i",LVL_4_PROMPT)
     lvl3_ques_arr = [q1, q2, q3, q4]
 
     #Level 4 questions initialized
@@ -323,228 +251,4 @@ def question_obj_create():
     return questions_array
 
 level_arr = game_level_create()
-questions_array =question_obj_create()
-
-
-#display the menu to prompt for the chosen computer / will remove for visual version, player interaction makes this redundant
-# def menu_display():
-#     while True:
-#         menu_number = 4
-#         for i in range(menu_number):
-#             print(f"Computer {(i+1)}")
-#         try:
-#             comp_choice=int(input("Which computer would you like to check out? [1-5]"))
-#         except:
-#             print("Select computers by number")
-#         if comp_choice < 6 and comp_choice > 0:
-#             return comp_choice - 1
-#         elif (comp_choice == 42):
-#             print("You've entered the end game!!")
-#             return comp_choice
-#         else:
-#             print("Please select computers 1-5. ")
-
-def computer_interaction(question_arr, level_arr, computer_num):
-    while True:
-        code_entered = input("enter code: ")
-        if code_entered == level_arr[(computer_num - 1)].secret_code:
-            print("Enemy_AI: System lock bypassed... crap!")
-            #print("SEAN_AI: There is broken code here... can you input the correct line to bypass?")
-            #print(level_arr[(computer_num - 1)].get_question())
-            for question in question_arr:
-                question.ask_question(level_arr[computer_num])
-            print("Heck ya! You cracked the code")
-            print(f"The code for the next computer is {level_arr[computer_num].secret_code}")
-            break
-        else:
-            try_again = input("WRONG... Try again...?(y/n)")
-            code_entered = ''
-            if try_again.lower() != 'y':
-                break 
-
-
-def pause_get_key():
-    while True:
-        a_key = get_key()
-        if a_key == K_RETURN:
-            break        
-# def pause_get_mouse():
-
-# def look_for_down():
-#     while True:
-#         a_key = get_key()
-#         if a_key == K_DOWN:
-#             player(0,0)
-#             break
-#boolean used to test when we jump into the endgame sequence
-# end_game = False
-# running = True
-
-#def main():
-# end_game = False
-# running = True
-# #Start the game!!!
-# while running:
-
-#     #not using right now... long term goals
-#     #player = Player(user_input, user_color, user_catch_phrase) 
-#     #handle key strokes
-#     for event in pygame.event.get():
-#         #Did the user hit a key?
-#         if event.type == pygame.KEYDOWN:
-#             if event.key == pygame.K_LEFT:
-#                 playerX_change = -1#speed of change
-#                 playerImg = pygame.image.load('player_right.png')
-#             if event.key == pygame.K_RIGHT:
-#                 playerX_change = 1
-#             if event.key == pygame.K_UP:
-#                 playerY_change = -1
-#             if event.key == pygame.K_DOWN:
-#                 playerY_change = 1
-#             if event.key == pygame.K_SPACE:
-#                 playerImg = pygame.image.load('player_left.png')
-#                 pygame.time.delay(3000)
-#                 playerImg = pygame.image.load("hero.png")
-#             #was it the escape key? If so Stop the loop
-#             if event.key == K_ESCAPE:
-#                 running = False
-
-#         #Did the user click the exit button on the window?
-#         elif event.type == QUIT:
-#             running = False
-    
-#     #fade to black
-#     screen.fill((0,0,0))
-#     #intro text
-#     #Blit warning background image
-#     message = ["Welcome to Digital Crafts. You are about to embark embark embark embark..", "let's ", "get", "some", "lines"]
-#     message1 = ["Error, error, error, uninvited AI present. Systems Crashing..."]
-
-#     message_display(message)
-#     message_display(message1)
-
-#     #print message from AI
-#     #loop lines from question
-#     #display input box
-#     #test user input
-#     #break out after correct user input
-
-
-#     #introduce support AI and enemy AI
-
-#     user_input = ask(screen,("Hello... who's there?: "))
-#     #user_color = input(("I need to calibrate my vision system, what color is your shirt: "))
-#     #check to see if they input a primary color
-#     #user_catch_phrase = input(("I need to calibrate my audio receiver, what is your catch phrase: "))
-#     pygame.display.flip()
-    
-    
-
-#     #Walking around
-#     while True:
-#         screen.fill((44,2,38))
-#         for event in pygame.event.get():
-#         #Did the user hit a key?
-#             if event.type == pygame.KEYDOWN:
-#                 if event.key == pygame.K_LEFT:
-#                     playerX_change = -1#speed of change
-#                     playerImg = pygame.image.load('player_right.png')
-#                 if event.key == pygame.K_RIGHT:
-#                     playerX_change = 1
-#                 if event.key == pygame.K_UP:
-#                     playerY_change = -1
-#                 if event.key == pygame.K_DOWN:
-#                     playerY_change = 1
-#                 if event.key == pygame.K_SPACE:
-#                     playerImg = pygame.image.load('player_left.png')
-#                     pygame.time.delay(3000)
-#                     playerImg = pygame.image.load("hero.png")
-#                 #was it the escape key? If so Stop the loop
-#                 if event.key == K_ESCAPE:
-#                     running = False
-
-#             #Did the user click the exit button on the window?
-#             elif event.type == QUIT:
-#                 running = False
-#         #drawing the player on the screen
-#         playerX += playerX_change
-#         playerY += playerY_change
-#         if playerX <= 0:
-#             playerX = 0#these are bondaries
-#         elif playerX >= 736:#Subtract 800-64, 64 is size of our hero, 800 is our window
-#             playerX = 736
-#         if playerY <= 0:
-#             playerY = 0#these are bondaries
-#         elif playerY >= 536:
-#             playerY = 536
-#         # print(f"""SEAN_AI: Hello player.name... sorry that today is your first day. Hope you did the prework...\n
-#         # I am SEAN, the AI that runs this place and I have just had my systems locked out. There is an enemy AI trying to crash the system.""")
-#         # print("SEAN_AI: The system is compromised and multiple parts of the code that runs DC have been corrupted. I can't reprogram myself, violates Asamov's first law, so I need you to help me by fixing the broken code. ")
-#         #function to display computer
-#         computer()
-#         #function to display plaer
-#         player(playerX,playerY)
-#         # message = "Welcome to Digital Crafts. You are about to embark embark embark embark.."
-#         # message1 = "Error, error, error, uninvited AI present. Systems Crashing..."
-
-#         # display_box_no_input(screen, message,1,1)
-#         # display_box_no_input(screen, message1,1,1)
-
-
-
-#         pygame.display.update()
-
-    
-# ##Interacts with a computer
-    
-
-#     #print("**You see several computers along the wall each is numbered and each is displaying the same message**")
-
-#     #display a computer screen?
-#     #print("**enter code:**")
-#     #print("SEAN_AI: We will need to fix the code on each computer to get the system back online and allow us to access the AI in the mainframe.")
-
-
-#     #move up
-    
-
-#     #will kick in on computer interaction
-#     while not end_game:
-#         #print(f"SEAN_AI: player.name please select a computer:")
-
-#         #computer_chosen = menu_display()
-        
-#         #if computer_chosen == 42: break
-#         #have a new computer show up after all 4 are defeated
-
-#         print("All the computers are locked out by the AI.")
-#         #could be cool to check for the comp and print a different message for the first computer
-#         #print(f"You chose computer {computer_chosen + 1}.")
-        
-#         # if computer_chosen == 0:
-#         #     print("SEAN_AI: The last thing I pulled from my emergency backup was the first code.")
-#         #     #print("I think wwe will need all of the answers to get through to the final boss")
-#         #     print(f"Try {level_arr[computer_chosen - 1].secret_code}")
-#         #     computer_interaction(questions_array[0], level_arr, computer_chosen)
-#         # else:
-#         #     computer_interaction(questions_array[computer_chosen], level_arr,computer_chosen)
-#         #     #print("enter code:")
-
-#         #print("Congrats you got the next code. ")
-#     print("The screen grows larger and larger as you watch it.")
-#     print("Suddenly you are swollowed up by the screen and enter the mainframe")
-
-#     print("You must take all you have learned and apply it to the final code error")
-#     print("If you can solve this error, my system guard will activate and remove the enemy AI.")
-
-#     final = Level("42")
-#     final_question = Question(("class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"),"self","There is only one thing missing from defeating the enemy AI... what is it!!!?!!(yes it is super corny, but it's late, this assignment made my eyes bleed, and I was emotional)")
-
-
-#     final_question.ask_question(final)
-
-#     print("Correct! And with that a very matrix style David C wizzes by you and destroy's the AI...")
-#     pygame.display.flip()
-# #main()
-
-
+questions_array =question_obj_create() 
