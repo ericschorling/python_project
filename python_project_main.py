@@ -125,11 +125,11 @@ playerY_change = 0
 #Takes information about the text box
 
 class Message_Box():
-    def __init__(self, font_size, x_cord, y_cord, size):
+    def __init__(self, font_size, x_cord, y_cord):
         self.font_size = font_size
         self.x_cord = x_cord
         self.y_cord = y_cord
-        self.size = size
+        #self.size = size
     def get_key(self):
         while True:
             event = pygame.event.poll()
@@ -140,19 +140,20 @@ class Message_Box():
     def message_display(self,question1):
         x = self.font_size
         for line in question1:
-            self.display_box(screen,line, self.x_cord, (self.y_cord + x)  )
+            self.display_text(screen,line, self.x_cord, (self.y_cord + x)  )
             x += self.font_size
-    def display_box(self,screen, message,x_cord, y_cord):
+    def display_text(self,screen, message,x_cord, y_cord):
         fontobject = pygame.font.Font(None, self.font_size)
-        # pygame.draw.rect(screen, (0, 0, 0),
-        #               (x_cord,
-        #               y_cord,
-        #                self.size, 20), 0)
+        #displays transparent unless display_background is called
         screen.blit(fontobject.render(message, 1, (255, 255, 255)),
         (( x_cord , y_cord )))
             
         pygame.display.flip()
-    
+    def display_background(self, color, size_x, size_y):
+        pygame.draw.rect(screen, color,
+                       (self.x_cord,
+                       self.y_cord,
+                        size_x, size_y), 0)
     def ask(self,screen, question): 
     #"ask(screen, question) -> answer"
     #pygame.font.init()        
@@ -381,13 +382,17 @@ def pause_get_key():
         a_key = get_key()
         if a_key == K_RETURN:
             break        
-
-def look_for_down():
+def pause_get_mouse():
     while True:
-        a_key = get_key()
-        if a_key == K_DOWN:
-            player(0,0)
+        event = pygame.event.get()
+        if event == pygame.MOUSEBUTTONDOWN:
             break
+# def look_for_down():
+#     while True:
+#         a_key = get_key()
+#         if a_key == K_DOWN:
+#             player(0,0)
+#             break
 #boolean used to test when we jump into the endgame sequence
 # end_game = False
 # running = True

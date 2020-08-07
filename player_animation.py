@@ -8,7 +8,8 @@ from python_project_main import level_arr
 from python_project_main import questions_array
 from python_project_main import pause_get_key
 from python_project_main import ask
-from python_project_main import look_for_down
+#from python_project_main import look_for_down
+from python_project_main import pause_get_mouse
 #Intialize Pygame
 pygame.init()
 pygame.font.init()
@@ -16,7 +17,7 @@ pygame.font.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 screenImg = pygame.image.load("Game_Board.png").convert()
-narration_box = Message_Box(24, 50, 525, 400 )    
+narration_box = Message_Box(24, 50, 525 )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -24,13 +25,14 @@ pygame.display.set_caption("Game Name")
 
 #Player
 playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
+computer_screen_Img = pygame.image.load("computer_screen.png")
 global playerX
 playerX = 175
 global playerY 
 playerY= 345
 playerX_change = 0
 playerY_change = 0
-
+BLACK_BACKGROUND = (0,0,0)
 #computer change to have a number for each one
 computerImg = pygame.image.load('laptop.png')
 #computer flag
@@ -138,7 +140,7 @@ while running:
         #used to make it easier to c/p the different comps 
         x = 0
         print(x)
-        screen.fill((0,0,0))
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
@@ -168,7 +170,7 @@ while running:
         c2 = 1
         x = 1
         print(x)
-        screen.fill((0,0,0))
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
@@ -197,7 +199,7 @@ while running:
         c3 = 1
         x = 2
         print(x)
-        screen.fill((0,0,0))
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
@@ -226,7 +228,7 @@ while running:
         c4 = 1
         x = 3
         print(x)
-        screen.fill((0,0,0))
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
@@ -256,7 +258,7 @@ while running:
         c5 = 1
         x = 4
         print(x)
-        screen.fill((0,0,0))
+        screen.fill(BLACK_BACKGROUND)
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         #show_text(132,21)
@@ -301,10 +303,7 @@ while running:
         #function to display player
         player(playerX,playerY)
         if first_run:
-            pygame.draw.rect(screen, (0, 0, 0),
-                       (narration_box.x_cord +10,
-                        narration_box.y_cord +10,
-                        500, 40), 0)
+            narration_box.display_background(BLACK_BACKGROUND,500,100)
             narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David..... Can anyone hear me?"])
             pause_get_key()
             first_run = False
