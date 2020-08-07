@@ -6,7 +6,7 @@ pygame.init()
 
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
-# screenImg = pygame.image.load("Game_Board.png").convert()
+# This was relocated below: screenImg = pygame.image.load("Game_Board.png").convert()
     
 
 #Title and Icon 
@@ -21,7 +21,6 @@ pygame.display.set_caption("Game Name")
 #         if click[0] == 1 and load_game != None:
 #             if load_game == "play":
 #                 # running() - add game play function
-
 
 #Created a game intro
 def game_intro():
@@ -131,6 +130,6 @@ while running:
     # Need to call game_loop function
     #fuction to call computer
     computer()
-    #function to display player
+    # #function to display player
     player(playerX,playerY)
     pygame.display.update() 
