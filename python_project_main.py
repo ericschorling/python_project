@@ -91,8 +91,8 @@ playerX_change = 0
 playerY_change = 0
 #player function
 #redundant?
-def player(x,y):
-    screen.blit(playerImg,(x,y))
+# def player(x,y):
+#     screen.blit(playerImg,(x,y))
 #create and place computers on screen
 # def player_move(pyx, pyy, pyx_change, pyy_change):
 #     pyx += pyx_change
@@ -107,17 +107,68 @@ def player(x,y):
 #         pyy = 536
 #     screen.blit(playerImg, (pyx, pyy))
 
-def computer():
-    computerImg = pygame.image.load('laptop.png')
-    screen.blit(computerImg,(100,100))
-    screen.blit(computerImg,(400,400))
-    screen.blit(computerImg,(100,400))
-    screen.blit(computerImg,(400,100))
-    screen.blit(computerImg,(700,100))
-    screen.blit(computerImg,(700,400))
+# def computer():
+#     computerImg = pygame.image.load('laptop.png')
+#     screen.blit(computerImg,(100,100))
+#     screen.blit(computerImg,(400,400))
+#     screen.blit(computerImg,(100,400))
+#     screen.blit(computerImg,(400,100))
+#     screen.blit(computerImg,(700,100))
+#     screen.blit(computerImg,(700,400))
 
 #Displays messages
 #passed in as an array of strings
+##Add in message class to better collect and display messages. 
+#Class defines methods that allow for display and getting text
+#also include interactino like pause key
+#can take or be initialized with coordinates***
+#Takes information about the text box
+
+class Message_Box():
+    def __init__(self, font_size, x_cord, y_cord, size):
+        self.font_size = font_size
+        self.x_cord = x_cord
+        self.y_cord = y_cord
+        self.size = size
+    def get_key(self):
+        while True:
+            event = pygame.event.poll()
+            if event.type == KEYDOWN:
+                return event.key
+            else:
+                pass
+    def message_display(self,question1):
+        x = self.font_size
+        for line in question1:
+            self.display_box(screen,line, self.x_cord, (self.y_cord + x)  )
+            x += self.font_size
+    def display_box(self,screen, message,x_cord, y_cord):
+        fontobject = pygame.font.Font(None, self.font_size)
+        # pygame.draw.rect(screen, (0, 0, 0),
+        #               (x_cord,
+        #               y_cord,
+        #                self.size, 20), 0)
+        screen.blit(fontobject.render(message, 1, (255, 255, 255)),
+        (( x_cord , y_cord )))
+            
+        pygame.display.flip()
+    
+    def ask(self,screen, question): 
+    #"ask(screen, question) -> answer"
+    #pygame.font.init()        
+        current_string = []
+        display_box(screen, question + "".join(current_string),139,291)
+        while 1:
+            inkey = get_key()
+            if inkey == K_BACKSPACE:
+                current_string = current_string[0:-1]
+            elif inkey == K_RETURN:
+                break
+            elif inkey <= 127:
+                current_string.append(chr(inkey))
+            display_box(screen, question + ": " + "".join(current_string),139,291)
+        return "".join(current_string)
+
 def message_display(question1):
     x = 0
     for line in question1:
@@ -183,7 +234,7 @@ def display_box(screen, message,x_cord, y_cord):
 #Prompts user for input and uses display_box to display the prompts
 def ask(screen, question): 
     #"ask(screen, question) -> answer"
-    pygame.font.init()        
+    #pygame.font.init()        
     current_string = []
     display_box(screen, question + "".join(current_string),139,291)
     while 1:

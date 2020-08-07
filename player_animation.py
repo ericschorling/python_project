@@ -2,6 +2,7 @@
 import pygame
 import random
 import math
+from python_project_main import Message_Box
 from python_project_main import message_display
 from python_project_main import level_arr
 from python_project_main import questions_array
@@ -10,11 +11,12 @@ from python_project_main import ask
 from python_project_main import look_for_down
 #Intialize Pygame
 pygame.init()
+pygame.font.init()
 
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 screenImg = pygame.image.load("Game_Board.png").convert()
-    
+narration_box = Message_Box(24, 50, 525, 400 )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -39,7 +41,7 @@ c4 = 0
 c5 = 0
 
 compx = [72,80,400,650,400]
-compy = [113,368,400,400,200]
+compy = [113,368,368,368,200]
 def computer (end_game):
     
     screen.blit(computerImg,(compx[0],compy[0]))
@@ -47,7 +49,7 @@ def computer (end_game):
     screen.blit(computerImg,(compx[2],compy[2]))
     screen.blit(computerImg,(compx[3],compy[3]))
     #add endgame computer image only when endgame is triggered.
-    screen.blit(computerImg,(compx[4],compx[4]))
+    if end_game: screen.blit(computerImg,(compx[4],compy[4]))
 
 def player(x,y):
     #Drawing image to screen
@@ -63,17 +65,24 @@ def show_text(x,y):
 def iscollision(alienX, alienY, bulletX, bulletY):
         #distance between two coordinates
         distance = math.sqrt(math.pow(alienX-bulletX,2)+math.pow(alienY-bulletY,2))
-        if distance < 27:
+        if distance < 40:
             return True 
         else:
             return False
 
 #Game Loop
 running = True
-end_game = True
+end_game = False
 game_over = False
+first_run = True
 flag = 0
+
+narration_box.message_display(["Welcome to this sweet game"])
+pause_get_key()
+
 while running:
+    
+
     if flag != 1:
         #Background Color (RGB Values)
         screen.blit(screenImg,(0,0))
@@ -243,8 +252,8 @@ while running:
         end_game = True
     #End_game computer
     collision5 = iscollision(compx[4],compy[4],playerX,playerY)
-    if collision5 and c4 != 1 and end_game:
-        c4 = 1
+    if collision5 and c5 != 1 and end_game:
+        c5 = 1
         x = 4
         print(x)
         screen.fill((0,0,0))
@@ -291,6 +300,14 @@ while running:
         computer(end_game)
         #function to display player
         player(playerX,playerY)
+        if first_run:
+            pygame.draw.rect(screen, (0, 0, 0),
+                       (narration_box.x_cord +10,
+                        narration_box.y_cord +10,
+                        500, 40), 0)
+            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David..... Can anyone hear me?"])
+            pause_get_key()
+            first_run = False
     pygame.display.update()
 
 
