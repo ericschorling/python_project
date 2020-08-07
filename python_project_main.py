@@ -155,8 +155,8 @@ class Message_Box():
                        self.y_cord,
                         size_x, size_y), 0)
     def ask(self,screen, question): 
-    #"ask(screen, question) -> answer"
-    #pygame.font.init()        
+        #"ask(screen, question) -> answer"
+        #pygame.font.init()        
         current_string = []
         display_box(screen, question + "".join(current_string),139,291)
         while 1:
@@ -180,7 +180,7 @@ def message_display(question1):
     #     if a_key == K_RETURN:
     #         break
 #Message functions for the game
-##Functions to display messages on the game board.
+##Functions to display messages on the game board./ Class makes these obsolete
 def get_key():
     while 1:
         event = pygame.event.poll()

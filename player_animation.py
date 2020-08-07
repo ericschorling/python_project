@@ -17,7 +17,7 @@ pygame.font.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 screenImg = pygame.image.load("Game_Board.png").convert()
-narration_box = Message_Box(24, 50, 525 )    
+narration_box = Message_Box(20, 400, 50 )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -303,8 +303,8 @@ while running:
         #function to display player
         player(playerX,playerY)
         if first_run:
-            narration_box.display_background(BLACK_BACKGROUND,500,100)
-            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David..... Can anyone hear me?"])
+            narration_box.display_background(BLACK_BACKGROUND,300,100)
+            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David....."," Can anyone hear me? [ENTER]"])
             pause_get_key()
             first_run = False
     pygame.display.update()
