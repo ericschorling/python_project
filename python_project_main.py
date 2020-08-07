@@ -91,8 +91,8 @@ playerX_change = 0
 playerY_change = 0
 #player function
 #redundant?
-def player(x,y):
-    screen.blit(playerImg,(x,y))
+# def player(x,y):
+#     screen.blit(playerImg,(x,y))
 #create and place computers on screen
 # def player_move(pyx, pyy, pyx_change, pyy_change):
 #     pyx += pyx_change
@@ -107,17 +107,79 @@ def player(x,y):
 #         pyy = 536
 #     screen.blit(playerImg, (pyx, pyy))
 
-def computer():
-    computerImg = pygame.image.load('laptop.png')
-    screen.blit(computerImg,(100,100))
-    screen.blit(computerImg,(400,400))
-    screen.blit(computerImg,(100,400))
-    screen.blit(computerImg,(400,100))
-    screen.blit(computerImg,(700,100))
-    screen.blit(computerImg,(700,400))
+# def computer():
+#     computerImg = pygame.image.load('laptop.png')
+#     screen.blit(computerImg,(100,100))
+#     screen.blit(computerImg,(400,400))
+#     screen.blit(computerImg,(100,400))
+#     screen.blit(computerImg,(400,100))
+#     screen.blit(computerImg,(700,100))
+#     screen.blit(computerImg,(700,400))
 
 #Displays messages
 #passed in as an array of strings
+##Add in message class to better collect and display messages. 
+#Class defines methods that allow for display and getting text
+#also include interactino like pause key
+#can take or be initialized with coordinates***
+#Takes information about the text box
+
+class Message_Box():
+    def __init__(self, font_size, x_cord, y_cord):
+        self.font_size = font_size
+        self.x_cord = x_cord
+        self.y_cord = y_cord
+        #self.size = size
+    def get_key(self):
+        while True:
+            event = pygame.event.poll()
+            if event.type == KEYDOWN:
+                return event.key
+            else:
+                pass
+    def message_display(self,question1):
+        x = self.font_size
+        for line in question1:
+            self.display_text(screen,line, self.x_cord, (self.y_cord + x)  )
+            x += self.font_size
+    def display_text(self,screen, message,x_cord, y_cord):
+        fontobject = pygame.font.Font(None, self.font_size)
+        #displays transparent unless display_background is called
+        screen.blit(fontobject.render(message, 1, (255, 255, 255)),
+        (( x_cord , y_cord )))
+            
+        pygame.display.flip()
+    def display_background(self, color, size_x, size_y):
+        pygame.draw.rect(screen, color,
+                       (self.x_cord,
+                       self.y_cord,
+                        size_x, size_y), 0)
+    def ask(self,screen, question): 
+        #"ask(screen, question) -> answer"
+        #pygame.font.init()        
+        current_string = []
+        display_box(screen, question + "".join(current_string),139,291)
+        while 1:
+            inkey = get_key()
+            if inkey == K_BACKSPACE:
+                current_string = current_string[0:-1]
+            elif inkey == K_RETURN:
+                break
+            elif inkey <= 127:
+                current_string.append(chr(inkey))
+            display_box(screen, question + ": " + "".join(current_string),139,291)
+        return "".join(current_string)
+
+def game_intro():
+    intro = True
+    while intro:
+        for event in pygame.event.get():
+            print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+
 def message_display(question1):
     x = 0
     for line in question1:
@@ -128,7 +190,7 @@ def message_display(question1):
     #     if a_key == K_RETURN:
     #         break
 #Message functions for the game
-##Functions to display messages on the game board.
+##Functions to display messages on the game board./ Class makes these obsolete
 def get_key():
     while 1:
         event = pygame.event.poll()
@@ -183,7 +245,7 @@ def display_box(screen, message,x_cord, y_cord):
 #Prompts user for input and uses display_box to display the prompts
 def ask(screen, question): 
     #"ask(screen, question) -> answer"
-    pygame.font.init()        
+    #pygame.font.init()        
     current_string = []
     display_box(screen, question + "".join(current_string),139,291)
     while 1:
@@ -198,8 +260,8 @@ def ask(screen, question):
             break
         # elif inkey == K_MINUS:
         #     current_string.append("_")
-        elif inkey == K_DOWN:
-            player(playerX - 10, playerY - 10)
+        # elif inkey == K_DOWN:
+        #     player(playerX - 10, playerY - 10)
         elif inkey <= 127:
             current_string.append(chr(inkey))
         display_box(screen, question + ": " + "".join(current_string),139,291)
@@ -236,7 +298,8 @@ def game_level_create():
     lvl2= Level(ans_array[1])
     lvl3= Level(ans_array[2])
     lvl4= Level(ans_array[3])
-    level_arr = [lvl1,lvl2,lvl3, lvl4]
+    finallvlv = Level("42")
+    level_arr = [lvl1,lvl2,lvl3, lvl4, finallvlv]
     print(ans_array)
     return level_arr
 #Function to create the question objects
@@ -255,11 +318,11 @@ def question_obj_create():
     dict_question_1 = Question(["computer_1 = {"," 'user': 'Sean',"," 'folder': 9,"," 'oh no': 'enemy found'","}","print(computer_1.pop('oh no'))"], "enemy found", LVL_1_PROMPT)
     dict_question_2 = Question(["player_skills = {","   'DigitalCrafts':{","      'programmer':{","         'name': 'sean',","         'skills':{","            'python': 70,","            'git and github': -1,","            'team work': 'Expert'","         }","       }","     }","   }"," print(player_skills['DigitalCrafts']['programmer']['name'])"], "sean","Last broken code\n")
     lvl1_ques_arr = [list_question_1,
-    # , list_question_2,list_question_3, dict_question_1, dict_question_2
+     list_question_2,list_question_3, dict_question_1, dict_question_2
     ]
 
     #level 2 question initialization
-    boolean_q_1 = Question(("if x = 100","    print(\"password\")","else:",    "print(\"you fail\")"), "if x == 100:", LVL_2_PROMPT)
+    boolean_q_1 = Question(("if x = 100","    print(\"password\")","else:",    "print(\"you fail\")"), "if x == 100;", LVL_2_PROMPT)
     lvl2_ques_arr = [boolean_q_1]
     #level 3 question initialization
     looper_q_1 = Question(("for x in stuff:", "print(stuff[x])", "x += 1"), "line 3", LVL_4_PROMPT)
@@ -268,18 +331,20 @@ def question_obj_create():
     #Level 4 questions initialized
     question1 = Question(["___ add(num1, num2):","   return num1 + num2"],"def",LVL_4_PROMPT)
     question2 = Question(["def add(num1_ num2):","   return num1 + num2"],",",LVL_4_PROMPT)
-    question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"(",LVL_4_PROMPT)
-    question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],")",LVL_4_PROMPT)
-    question5 = Question(("\ndef add(num1, num2)_","  return num1 + num2"),":",LVL_4_PROMPT)
+    question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"[",LVL_4_PROMPT)#won't work
+    question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],"]",LVL_4_PROMPT)#won't work
+    question5 = Question(("\ndef add(num1, num2)_","  return num1 + num2"),";",LVL_4_PROMPT)#won't work
     question6 = Question(("\ndef add(num1, num2):"," ____return num1 + num2"),"    ",LVL_4_PROMPT)
     question7 = Question(("\ndef add(num1, num2)_","  ______ num1 + num2\n"),"return",LVL_4_PROMPT)
     question8 = Question(("\ndef add(__________):","    return num1 + num2\n"),"num1, num2",LVL_4_PROMPT)
     question9 = Question(("\ndef add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)\n"),"add",LVL_4_PROMPT)
     lvl4_ques_arr = [ question1, question2, question3, question4, question5, question6, question7,question8, question9]
 
-
+    #endgame question
+    final_question = Question(("class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"),"self","Who can truly be the hero...? ")
+    end_game_q = [final_question]
     #Array for all the question arrays
-    questions_array=[lvl1_ques_arr, lvl2_ques_arr, lvl3_ques_arr, lvl4_ques_arr]
+    questions_array=[lvl1_ques_arr, lvl2_ques_arr, lvl3_ques_arr, lvl4_ques_arr, end_game_q]
     return questions_array
 
 level_arr = game_level_create()
@@ -327,13 +392,14 @@ def pause_get_key():
         a_key = get_key()
         if a_key == K_RETURN:
             break        
+# def pause_get_mouse():
 
-def look_for_down():
-    while True:
-        a_key = get_key()
-        if a_key == K_DOWN:
-            player(0,0)
-            break
+# def look_for_down():
+#     while True:
+#         a_key = get_key()
+#         if a_key == K_DOWN:
+#             player(0,0)
+#             break
 #boolean used to test when we jump into the endgame sequence
 # end_game = False
 # running = True
