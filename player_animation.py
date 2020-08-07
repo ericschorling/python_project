@@ -96,6 +96,10 @@ def iscollision(alienX, alienY, bulletX, bulletY):
 running = True
 end_game = False
 first_run = True
+first_comp = False
+second_comp = False
+third_comp = False
+fourth_comp = False
 flag = 0 #DON"T EVER CHANGE THIS
 
 #Display opening card
@@ -178,8 +182,10 @@ while running:
                     break
             screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])    
+        message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])
+        first_comp = True    
         pause_get_key()
+        screen.blit(screenImg,(0,0))
 
     collision2 = iscollision(compx[1],compy[1],playerX,playerY)
     if collision2 and c2 != 1:
@@ -209,6 +215,8 @@ while running:
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])    
         pause_get_key()
+        second_comp = True
+        screen.blit(screenImg,(0,0))
 
     collision3 = iscollision(compx[2],compy[2],playerX,playerY)
     if collision3 and c3 != 1:
@@ -238,6 +246,8 @@ while running:
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         message_display(["You unlocked this computer!!","The next code is " + level_arr[x+1].secret_code])    
         pause_get_key()
+        third_comp = True
+        screen.blit(screenImg,(0,0))
 
     collision4 = iscollision(compx[3],compy[3],playerX,playerY)
     if collision4 and c4 != 1:
@@ -267,7 +277,9 @@ while running:
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         message_display(["You unlocked this computer!!","The next code is 42","Enemy AI Brain revealed!!"])    
         pause_get_key()
-        end_game = True
+        fourth_comp = True
+        end_game= True
+        screen.blit(screenImg,(0,0))
     #End_game computer
     collision5 = iscollision(compx[4],compy[4],playerX,playerY)
     if collision5 and c5 != 1 and end_game:
@@ -321,12 +333,48 @@ while running:
         if first_run:
             #narration_box.display_background(BLACK_BACKGROUND,300,100)
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is DigitalCraft's AI David.....","If you can hear me press [ENTER]"])
+            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is DigitalCraft's AI D4v1D.....","If you can hear me press [ENTER]"])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["I am currently under attack by an enemy AI.","Four of my databases have been compromised.","Proceed upstairs to fix the first computer"])
+            narration_box.message_display(["D4v1d_AI: I am currently under attack.","Four of my databases have been compromised."])
+            pause_get_key()
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["D4v1d_AI: You will need to use your", "prework skills to get the system back up.","Proceed upstairs to fix the first computer"])
             pause_get_key()
             first_run = False
+            
+        if first_comp:
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["David_AI: Well Done. You've unlocked the first computer.", "Head downstairs to unlock the second computer."])
+            pause_get_key()
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["Keep your secret code from the previous computer.", "You will need ot use it to unlock the next computer."])
+            pause_get_key()
+            first_comp = False
+        if second_comp:
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["David_AI: Well Done. You've unlocked the first computer.", "Head downstairs to unlock the second computer."])
+            pause_get_key()
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["Keep your secret code from the previous computer.", "You will need ot use it to unlock the next computer."])
+            pause_get_key()
+            second_comp = False
+        if third_comp:
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["David_AI: You're crushing it!!","You've unlocked the second computer!!"])
+            pause_get_key()
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display([" The AI is hiding in another computer", "Head to the thrid computer to continue."])
+            pause_get_key()
+            third_comp = False
+        if fourth_comp:
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["D4v1d_AI: The evil AI database has appeared","Let's head to the roof to shut it down."])
+            pause_get_key()
+            screen.blit(text_box_image,(0,0))
+            narration_box.message_display(["You'll need to use all your skills to beat the AI", "It is just one more computer to shut it down."])
+            pause_get_key()
+            fourth_comp = False
     pygame.display.update()
 
 while True:
