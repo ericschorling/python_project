@@ -19,7 +19,7 @@ pygame.mixer.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 
-narration_box = Message_Box(20, 470, 70 )    
+narration_box = Message_Box(20, 450, 50 )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -43,6 +43,8 @@ screenImg = pygame.image.load("Game_Board.png").convert()
 playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
 computer_screen_Img = pygame.image.load("computer_screen.png")
 introImg = pygame.image.load("Game_Opening_Screen.png").convert()
+credit_screen = pygame.image.load("Credit_Screen.png")
+end_game_screen = pygame.image.load("End_Game_Screen.png")
 
 #computer flag
 c1 = 0
@@ -65,9 +67,14 @@ def computer (end_game):
         screen.blit(computerImg,(compx[1],compy[1]))
     else:
         screen.blit(computerImg_Comp,(compx[1],compy[1]))
-    #finish if/else for new image
-    screen.blit(computerImg,(compx[2],compy[2]))
-    screen.blit(computerImg,(compx[3],compy[3]))
+    if c3 != 1:
+        screen.blit(computerImg,(compx[2],compy[2]))
+    else:
+        screen.blit(computerImg_Comp,(compx[2],compy[2]))
+    if c4 != 1:
+        screen.blit(computerImg,(compx[3],compy[3]))
+    else:
+        screen.blit(computerImg_Comp,(compx[3],compy[3]))
     #add endgame computer image only when endgame is triggered.
     if end_game: screen.blit(bossImg,(compx[4],compy[4]))
 
@@ -286,8 +293,10 @@ while running:
                     break
             screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
-        message_display(["You have defeated the evil AI and restored Digital Crafts!!"])    
+        message_display(["You have defeated the evil AI and restored DigitalCrafts!!", "Press [ENTER] to destroy the AI!!"])
         pause_get_key()
+        running = False
+        flag = 1
     
     #drawing the player on the screen
     playerX += playerX_change
@@ -312,12 +321,19 @@ while running:
         if first_run:
             #narration_box.display_background(BLACK_BACKGROUND,300,100)
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David.....","If you can hear me press [ENTER]"])
+            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is DigitalCraft's AI David.....","If you can hear me press [ENTER]"])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["I am currently under attack by an enemy AI.","Four of my databases have been compromised.","Proceed to upstairs to fix the first computer"])
+            narration_box.message_display(["I am currently under attack by an enemy AI.","Four of my databases have been compromised.","Proceed upstairs to fix the first computer"])
             pause_get_key()
             first_run = False
     pygame.display.update()
 
-
+while True:
+    screen.blit(end_game_screen,(0,0))
+    pygame.display.update()
+    pause_get_key()
+    screen.blit(credit_screen,(0,0))
+    pygame.display.update()
+    pause_get_key()
+    break
