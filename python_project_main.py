@@ -236,7 +236,8 @@ def game_level_create():
     lvl2= Level(ans_array[1])
     lvl3= Level(ans_array[2])
     lvl4= Level(ans_array[3])
-    level_arr = [lvl1,lvl2,lvl3, lvl4]
+    finallvlv = Level("42")
+    level_arr = [lvl1,lvl2,lvl3, lvl4, finallvlv]
     print(ans_array)
     return level_arr
 #Function to create the question objects
@@ -277,9 +278,11 @@ def question_obj_create():
     question9 = Question(("\ndef add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)\n"),"add",LVL_4_PROMPT)
     lvl4_ques_arr = [ question1, question2, question3, question4, question5, question6, question7,question8, question9]
 
-
+    #endgame question
+    final_question = Question(("class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"),"self","Who can truly be the hero...? ")
+    end_game_q = [final_question]
     #Array for all the question arrays
-    questions_array=[lvl1_ques_arr, lvl2_ques_arr, lvl3_ques_arr, lvl4_ques_arr]
+    questions_array=[lvl1_ques_arr, lvl2_ques_arr, lvl3_ques_arr, lvl4_ques_arr, end_game_q]
     return questions_array
 
 level_arr = game_level_create()
