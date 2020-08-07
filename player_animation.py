@@ -64,8 +64,14 @@ compx = [72,80,400,650,400]
 compy = [113,368,368,368,108]
 def computer (end_game):
     
-    if c1 != 1 : screen.blit(computerImg,(compx[0],compy[0])) | screen.blit(computerImg_Comp,(compx[0],compy[0]))  
-    screen.blit(computerImg,(compx[1],compy[1]))
+    if c1 != 1 : 
+        screen.blit(computerImg,(compx[0],compy[0])) 
+    else:
+        screen.blit(computerImg_Comp,(compx[0],compy[0]))  
+    if c2 != 1 :
+        screen.blit(computerImg,(compx[1],compy[1]))
+    else:
+        screen.blit(computerImg_Comp,(compx[1],compy[1]))
     screen.blit(computerImg,(compx[2],compy[2]))
     screen.blit(computerImg,(compx[3],compy[3]))
     #add endgame computer image only when endgame is triggered.

@@ -295,9 +295,13 @@ def question_obj_create():
     boolean_q_4 = Question(["if x == 100:","    print(\"code\")","elif x > 100:","____print(\"try again\")","else:",    "print(\"you fail\")"], "    ", LVL_2_PROMPT)
     boolean_q_5 = Question(["if AI == 'Evil':","    print(\"foiled\")","elif x > 100:","    print(\"try again\")","else:",    "print(\"you fail\")","AI = Evil"], "foiled", LVL_2_PROMPT)
     lvl2_ques_arr = [boolean_q_1, boolean_q_2, boolean_q_3, boolean_q_4, boolean_q_5]
+    
     #level 3 question initialization
-    looper_q_1 = Question(["for x in stuff:", "print(stuff[x])", "x += 1"], "line 3", LVL_4_PROMPT)
-    lvl3_ques_arr = [looper_q_1]
+    q1 = Question(["________ = [1,2,3,4,5,6,7,8,9,10]", "for i in num_list:" ,"    print(num_list[i])"], "num_list",LVL_4_PROMPT)
+    q2 = Question(["extended_numlist = [0,1,2,3,4,Done!]", "for i in num_list:" ,"  _________________________  "], "print(extended_numlist",LVL_4_PROMPT)
+    q3 = Question(["colors_list = [blue, yello, green, red, purple]", "____________________" ,"    print(color_list[i])"], "for i in color_list:",LVL_4_PROMPT)
+    q4 = Question(["computer_list = [Monitor, Motherboard, CPU, Hard Drive]", "for _ in computer_list:" ,"    print(computer_list[i])"], "i",LVL_4_PROMPT)
+    lvl3_ques_arr = [q1, q2, q3, q4]
 
     #Level 4 questions initialized
     question1 = Question(["___ add(num1, num2):","   return num1 + num2"],"def",LVL_4_PROMPT)
