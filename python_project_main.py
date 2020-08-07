@@ -170,6 +170,16 @@ class Message_Box():
             display_box(screen, question + ": " + "".join(current_string),139,291)
         return "".join(current_string)
 
+def game_intro():
+    intro = True
+    while intro:
+        for event in pygame.event.get():
+            print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+
 def message_display(question1):
     x = 0
     for line in question1:

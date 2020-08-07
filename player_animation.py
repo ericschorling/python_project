@@ -8,6 +8,7 @@ from python_project_main import level_arr
 from python_project_main import questions_array
 from python_project_main import pause_get_key
 from python_project_main import ask
+from python_project_main import game_intro
 #from python_project_main import look_for_down
 from python_project_main import pause_get_mouse
 #Intialize Pygame
@@ -74,12 +75,15 @@ def iscollision(alienX, alienY, bulletX, bulletY):
 
 #Game Loop
 running = True
-end_game = False
+end_game = True
 game_over = False
 first_run = True
 flag = 0
 
-narration_box.message_display(["Welcome to this sweet game"])
+introImg = pygame.image.load("Game_Opening_Screen.png").convert()
+screen.blit(introImg,(0,0))
+narration_box.message_display([""])
+#game_intro()
 pause_get_key()
 
 while running:
@@ -303,7 +307,7 @@ while running:
         #function to display player
         player(playerX,playerY)
         if first_run:
-            narration_box.display_background(BLACK_BACKGROUND,300,100)
+            #narration_box.display_background(BLACK_BACKGROUND,300,100)
             narration_box.message_display(["Error Errror Error... Something is going wrong", "This is Digital Craft's AI David....."," Can anyone hear me? [ENTER]"])
             pause_get_key()
             first_run = False
