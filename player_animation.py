@@ -2,6 +2,7 @@
 import pygame
 import random
 import math
+import os
 from python_project_main import Message_Box
 from python_project_main import message_display
 from python_project_main import level_arr
@@ -97,6 +98,8 @@ narration_box.message_display([""])
 button(357,480,122,33)
 
 while running:
+    os.system("aplay 2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav&")
+
     
 
     if flag != 1:
