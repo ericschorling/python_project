@@ -7,7 +7,7 @@ from python_project_main import Message_Box
 from python_project_main import message_display
 from python_project_main import level_arr
 from python_project_main import questions_array
-#from python_project_main import pause_get_key
+from python_project_main import pause_get_key
 from python_project_main import ask
 from python_project_main import game_intro
 #from python_project_main import look_for_down
@@ -15,7 +15,10 @@ from python_project_main import game_intro
 #Intialize Pygame
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
+pygame.mixer.music.load("2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav")
+pygame.mixer.music.play(loops=-1)
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 screenImg = pygame.image.load("Game_Board.png").convert()
@@ -45,13 +48,14 @@ c4 = 0
 c5 = 0
 
 def button(x,y,w,h):
-    mouse = pygame.mouse.get_pos()
+    #mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     # #Takes width, height and location(x,y)
     while True:
-        if 357+122 > mouse[0] > 357 and 480+33 > mouse[1] > 480:
-            if click[0] == 1:
-                break
+        #if 357+122 > mouse[0] > 357 and 480+33 > mouse[1] > 480:
+        if click[0] == 1:
+            print(click)
+            break
 
 compx = [72,80,400,650,400]
 compy = [113,368,368,368,200]
@@ -94,11 +98,11 @@ introImg = pygame.image.load("Game_Opening_Screen.png").convert()
 screen.blit(introImg,(0,0))
 narration_box.message_display([""])
 #game_intro()
-# pause_get_key()
-button(357,480,122,33)
+pause_get_key()
+#button(357,480,122,33)
 
 while running:
-    os.system("aplay 2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav&")
+    #os.system("aplay 2015-09-25_-_Old_Video_Game_Music_1_-_David_Fesliyan.wav&")
 
     
 
