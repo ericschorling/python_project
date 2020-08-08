@@ -19,7 +19,7 @@ pygame.mixer.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 
-narration_box = Message_Box(20, 450, 50, screen )    
+narration_box = Message_Box(20, 445, 50, screen )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -165,7 +165,7 @@ while running:
         #Background Image
         screen.blit(pygame.image.load('computer_screen.png'),(0,0))
         while True:
-            message_display([f"David_AI: I got the first code, try {level_arr[x].secret_code}"])
+            message_display([f"D4v1d_AI: I got the first code, try {level_arr[x].secret_code}"])
             user_input = ask(screen, "Enter Secret Code")
             if user_input == level_arr[x].secret_code:
                 message_display(["CORRECT!!", "Press [ENTER] to access computer"])
@@ -205,7 +205,7 @@ while running:
         for questions in range(len(questions_array[x])):
             while True:
                 message_display(questions_array[x][questions].question)
-                user_input = ask(screen, "")
+                user_input = ask(screen, questions_array[x][questions].prompt)
                 if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
@@ -236,7 +236,7 @@ while running:
         for questions in range(len(questions_array[x])):
             while True:
                 message_display(questions_array[x][questions].question)
-                user_input = ask(screen, "")
+                user_input = ask(screen, questions_array[x][questions].prompt)
                 if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
@@ -267,7 +267,7 @@ while running:
         for questions in range(len(questions_array[x])):
             while True:
                 message_display(questions_array[x][questions].question)
-                user_input = ask(screen, "")
+                user_input = ask(screen, questions_array[x][questions].prompt)
                 if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     message_display(["Woot Woot"])
@@ -277,7 +277,7 @@ while running:
         message_display(["You unlocked this computer!!","The next code is 42","Enemy AI Brain revealed!!"])    
         pause_get_key()
         fourth_comp = True
-        end_game= True
+        #end_game= True
         screen.blit(screenImg,(0,0))
     #End_game computer
     collision5 = iscollision(compx[4],compy[4],playerX,playerY)
@@ -298,7 +298,7 @@ while running:
         for questions in range(len(questions_array[x])):
             while True:
                 message_display(questions_array[x][questions].question)
-                user_input = ask(screen, "")
+                user_input = ask(screen, questions_array[x][questions].prompt)
                 if user_input == questions_array[x][questions].answer:
                     screen.blit(pygame.image.load('computer_screen.png'),(0,0))
                     break
@@ -329,8 +329,8 @@ while running:
         computer(end_game)
         #function to display player
         player(playerX,playerY)
+        
         if first_run:
-            #narration_box.display_background(BLACK_BACKGROUND,300,100)
             screen.blit(text_box_image,(0,0))
             narration_box.message_display(["Error Errror Error... Something is going wrong", "This is DigitalCraft's AI D4v1D.....","If you can hear me press [ENTER]"])
             pause_get_key()
@@ -374,6 +374,7 @@ while running:
             narration_box.message_display(["You'll need to use all your skills.", "It is just one more computer to shut it down."])
             pause_get_key()
             fourth_comp = False
+            end_game = True
     pygame.display.update()
 
 while True:

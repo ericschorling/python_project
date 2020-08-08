@@ -1,6 +1,6 @@
 import random
-from pp_classes import Level
-from test2 import Question
+#from pp_classes import Level
+#from test2 import Question
 import pygame
 import pygame.font
 import pygame.event
@@ -69,7 +69,18 @@ class Message_Box():
                 current_string.append(chr(inkey))
             self.display_text( question + ": " + "".join(current_string),139,291)
         return "".join(current_string)
-
+#Level Class, holds secret answer
+class Level():
+    def __init__(self,secret_code):
+        self.secret_code = secret_code
+#Question Class, holds questions for each level
+class Question ():
+    def __init__(self,question,answer, prompt):
+        self.question = question 
+        # self.answer_prompt = answer_prompt
+        self.answer = answer
+        self.prompt = prompt
+        #self.secret_code = secret_code
 
 def message_display(question1):
     x = 0
@@ -190,9 +201,9 @@ def game_level_create():
 #Function to create the question objects
 def question_obj_create():
     #Prompts for the asnwers, different by question and level
-    LVL_1_PROMPT = "Solve the riddle with code provided\n"
-    LVL_2_PROMPT = "Fix the line of code.\n "
-    LVL_4_PROMPT = 'Enter missing code\n'
+    LVL_1_PROMPT = "Solve the riddle with code provided"
+    LVL_2_PROMPT = "Enter the missing code "
+    LVL_4_PROMPT = 'Enter missing code'
     
 
     #Since each question is an object we have to initialize them all here.
@@ -217,7 +228,7 @@ def question_obj_create():
     #level 3 question initialization
     q1 = Question(["________ = [1,2,3,4,5,6,7,8,9,10]", "for i in num-list:" ,"    print(num-list[i])"], "num-list",LVL_4_PROMPT)
     q2 = Question(["extended-numlist = [0,1,2,3,4,Done!]", "for i in num-list:" ,"  print(___________________)  "], "extended-numlist",LVL_4_PROMPT)
-    q3 = Question(["colors-list = [blue, yellow, green, red, purple]", "____________________" ,"    print(color-list[i])"], "for i in color-list",LVL_4_PROMPT)
+    q3 = Question(["colors-list = [blue, yellow, green, red, purple]", "____________________" ,"    print(color-list[i])"], "for i in colors-list",LVL_4_PROMPT)
     q4 = Question(["computer-list = [Monitor, Motherboard, CPU, Hard Drive]", "for _ in computer-list:" ,"    print(computer-list[i])"], "i",LVL_4_PROMPT)
     lvl3_ques_arr = [q1, q2, q3, q4]
 
