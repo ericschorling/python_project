@@ -19,7 +19,7 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 # Set screen for game and create clock variable for timing.
-#screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 class Message_Box():
     def __init__(self, font_size, x_cord, y_cord, screen):
@@ -37,7 +37,6 @@ class Message_Box():
     def message_display(self,question1):
         x = self.font_size
         for line in question1:
-            print(line)
             self.display_text(line, self.x_cord, (self.y_cord + x)  )
             x += self.font_size
         pygame.display.update()
@@ -77,10 +76,7 @@ def message_display(question1):
     for line in question1:
         display_box_no_input(screen,line, 132, 21 + x  )
         x += 20
-    # while True:
-    #     a_key = get_key()
-    #     if a_key == K_RETURN:
-    #         break
+    pygame.display.update()
 #Message functions for the game
 ##Functions to display messages on the game board./ Class makes these obsolete
 def get_key():
@@ -99,19 +95,12 @@ def display_box_no_input(screen, message,x_cord , y_cord ,font_size =18):
                       (x_cord,
                       y_cord,
                        540, 20), 0)
-    # pygame.draw.rect(screen, (255, 255, 255),
-    #                   ((screen.get_width() / 2) - 102,
-    #                    screen.get_height() - 68,
-    #                    404, 60), 1)
     #This displays the messages
     screen.blit(fontobject.render(message, 1, (255, 255, 255)),
         (( x_cord , y_cord )))
             
-    pygame.display.flip()
-    # while True:
-    #     a_key = get_key()
-    #     if a_key == K_RETURN:
-    #         break
+    #pygame.display.flip()
+    
 #THis is used to ask for input from the user and doesn't need a key press to close
 def display_box(screen, message,x_cord, y_cord):
     #"Print a message in a box in the middle of the screen"
@@ -227,7 +216,7 @@ def question_obj_create():
     
     #level 3 question initialization
     q1 = Question(["________ = [1,2,3,4,5,6,7,8,9,10]", "for i in num-list:" ,"    print(num-list[i])"], "num-list",LVL_4_PROMPT)
-    q2 = Question(["extended_numlist = [0,1,2,3,4,Done!]", "for i in num-list:" ,"  print(___________________)  "], "extended-numlist",LVL_4_PROMPT)
+    q2 = Question(["extended-numlist = [0,1,2,3,4,Done!]", "for i in num-list:" ,"  print(___________________)  "], "extended-numlist",LVL_4_PROMPT)
     q3 = Question(["colors-list = [blue, yellow, green, red, purple]", "____________________" ,"    print(color-list[i])"], "for i in color-list",LVL_4_PROMPT)
     q4 = Question(["computer-list = [Monitor, Motherboard, CPU, Hard Drive]", "for _ in computer-list:" ,"    print(computer-list[i])"], "i",LVL_4_PROMPT)
     lvl3_ques_arr = [q1, q2, q3, q4]

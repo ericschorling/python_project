@@ -142,16 +142,13 @@ while running:
                 playerImg = pygame.image.load("Sean_Walking_Right_Alt.png").convert_alpha()
                 playerX_change = 0
                 playerY_change = 0
-
             if event.key == pygame.K_LEFT:
                 playerImg = pygame.image.load("Sean_Walking_Left_Alt.png").convert_alpha()
                 playerX_change = 0
                 playerY_change = 0
-
             if event.key == pygame.K_UP:
                 playerX_change = 0
                 playerY_change = 0
-
             if event.key == pygame.K_DOWN:
                 playerImg = pygame.image.load("Sean_Front.png").convert_alpha()
                 playerX_change = 0
@@ -347,26 +344,26 @@ while running:
             
         if first_comp:
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["David_AI: Well Done. You've unlocked the first computer.", "Head downstairs to unlock the second computer."])
+            narration_box.message_display(["D4v1d_AI: Well Done. ","You've unlocked the first computer.", "Head downstairs to unlock the second computer."])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["Keep your secret code from the previous computer.", "You will need ot use it to unlock the next computer."])
+            narration_box.message_display(["Keep your secret code", "You will use it to unlock the next computer."])
             pause_get_key()
             first_comp = False
         if second_comp:
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["David_AI: Well Done. You've unlocked the first computer.", "Head downstairs to unlock the second computer."])
+            narration_box.message_display(["D4v1d_AI: Amazing. ","You've unlocked the second computer.", "Head over to unlock the third computer."])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["Keep your secret code from the previous computer.", "You will need ot use it to unlock the next computer."])
+            narration_box.message_display(["D4v1d_AI: The AI is messing with my code.","We will have to keep fixing it","to keep my systems running..."])
             pause_get_key()
             second_comp = False
         if third_comp:
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["David_AI: You're crushing it!!","You've unlocked the second computer!!"])
+            narration_box.message_display(["David_AI: You're crushing it!!","You've unlocked the third computer!!"])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display([" The AI is hiding in another computer", "Head to the thrid computer to continue."])
+            narration_box.message_display([" The AI is hiding in another computer", "Head to the fourth computer to continue."])
             pause_get_key()
             third_comp = False
         if fourth_comp:
@@ -374,7 +371,7 @@ while running:
             narration_box.message_display(["D4v1d_AI: The evil AI database has appeared","Let's head to the roof to shut it down."])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["You'll need to use all your skills to beat the AI", "It is just one more computer to shut it down."])
+            narration_box.message_display(["You'll need to use all your skills.", "It is just one more computer to shut it down."])
             pause_get_key()
             fourth_comp = False
     pygame.display.update()
