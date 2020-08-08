@@ -19,14 +19,14 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 # Set screen for game and create clock variable for timing.
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+#screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 class Message_Box():
-    def __init__(self, font_size, x_cord, y_cord):
+    def __init__(self, font_size, x_cord, y_cord, screen):
         self.font_size = font_size
         self.x_cord = x_cord
         self.y_cord = y_cord
-        #self.size = size
+        self.screen = screen
     def get_key(self):
         while True:
             event = pygame.event.poll()
@@ -37,26 +37,27 @@ class Message_Box():
     def message_display(self,question1):
         x = self.font_size
         for line in question1:
-            self.display_text(screen,line, self.x_cord, (self.y_cord + x)  )
+            print(line)
+            self.display_text(line, self.x_cord, (self.y_cord + x)  )
             x += self.font_size
+        pygame.display.update()
     
-    def display_text(self,screen, message,x_cord, y_cord):
+    def display_text(self, message,x_cord, y_cord):
         fontobject = pygame.font.Font(None, self.font_size)
         #displays transparent unless display_background is called
-        screen.blit(fontobject.render(message, 1, (255, 255, 255)),
+        self.screen.blit(fontobject.render(message, 1, (0,0,0)),
         (( x_cord , y_cord )))
-            
-        pygame.display.flip()
+
     def display_background(self, color, size_x, size_y):
-        pygame.draw.rect(screen, color,
+        pygame.draw.rect(self.screen, color,
                        (self.x_cord,
                        self.y_cord,
                         size_x, size_y), 0)
-    def ask(self,screen, question): 
+    def ask(self, question): 
         #"ask(screen, question) -> answer"
         #pygame.font.init()        
         current_string = []
-        self.display_text(screen, question + "".join(current_string),139,291)
+        self.display_text( question + "".join(current_string),139,291)
         while 1:
             inkey = get_key()
             if inkey == K_BACKSPACE:
@@ -64,10 +65,10 @@ class Message_Box():
             elif inkey == K_RETURN:
                 break
             elif inkey == K_ESCAPE:
-                break
+                exit()
             elif inkey <= 127:
                 current_string.append(chr(inkey))
-            self.display_text(screen, question + ": " + "".join(current_string),139,291)
+            self.display_text( question + ": " + "".join(current_string),139,291)
         return "".join(current_string)
 
 

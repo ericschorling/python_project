@@ -19,7 +19,7 @@ pygame.mixer.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 
-narration_box = Message_Box(20, 450, 50 )    
+narration_box = Message_Box(20, 450, 50, screen )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -104,7 +104,8 @@ flag = 0 #DON"T EVER CHANGE THIS
 
 #Display opening card
 screen.blit(introImg,(0,0))
-narration_box.message_display([""])
+#narration_box.message_display([""])
+pygame.display.update()
 pause_get_key()
 
 #Start the game
@@ -118,7 +119,7 @@ while running:
     for event in pygame.event.get():
         #Checking if x quit button is pressed
         if event.type == pygame.QUIT:
-            #Condition to exit the while loop
+            exit()
             running = False 
         #if a keystroke is pressed check whether right or left 
         if event.type == pygame.KEYDOWN:
@@ -134,7 +135,8 @@ while running:
             if event.key == pygame.K_DOWN:
                 playerY_change = 4
                 playerImg = pygame.image.load("Sean_Down.png").convert_alpha()
-
+            if event.key == pygame.K_ESCAPE:
+                exit()
         if event.type ==  pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
                 playerImg = pygame.image.load("Sean_Walking_Right_Alt.png").convert_alpha()
