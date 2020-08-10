@@ -19,7 +19,7 @@ pygame.mixer.init()
 #Create the screen W,H
 screen = pygame.display.set_mode((800,600))
 
-narration_box = Message_Box(20, 445, 50, screen )    
+narration_box = Message_Box(21, 445, 50, screen )    
 #Background 
 # background = pygame.image.load('bg.jpg')
 #Title and Icon 
@@ -35,7 +35,7 @@ playerY_change = 0
 BLACK_BACKGROUND = (0,0,0)
 
 #Image file variables
-computerImg = pygame.image.load('laptop.png')
+computerImg = pygame.image.load('./Characters_and_Gameboard/laptop.png')
 computerImg_Comp = pygame.image.load('Computer_Completed.png')
 bossImg = pygame.image.load('Final_Computer.png').convert_alpha()
 text_box_image = pygame.image.load('Text_Box.png').convert_alpha()

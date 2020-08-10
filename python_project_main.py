@@ -117,16 +117,16 @@ def display_box(screen, message,x_cord, y_cord):
     #"Print a message in a box in the middle of the screen"
     #This sets the background for the text input. 
     fontobject = pygame.font.Font(None, 18)
-    pygame.draw.rect(screen, (0, 0, 0),
-                      (x_cord,
-                      y_cord,
-                       540, 20), 0)
+    # pygame.draw.rect(screen, (0, 0, 0),
+    #                   (x_cord,
+    #                   y_cord,
+    #                    540, 20), 0)
     # pygame.draw.rect(screen, (255, 255, 255),
     #                   ((139 - 102,
     #                    screen.get_height() - 68,
     #                    404, 60), 1)
     #This displays the messages
-    screen.blit(fontobject.render(message, 1, (255, 255, 255)),
+    screen.blit(fontobject.render(message, 1, (255,255,255)),
         (x_cord, y_cord))
             
     pygame.display.flip()
@@ -145,15 +145,9 @@ def ask(screen, question):
         if inkey == K_BACKSPACE:
             current_string = current_string[0:-1]
         elif inkey == K_RETURN:
-            # file = open(bad_words_file, 'r').readlines()
-            # if "".join(current_string) in [thing[:-1] for thing in file]:
-            #     current_string = []
-            # else:
             break
-        # elif inkey == K_MINUS:
-        #     current_string.append("_")
-        # elif inkey == K_DOWN:
-        #     player(playerX - 10, playerY - 10)
+        elif inkey == K_ESCAPE:
+            quit()
         elif inkey <= 127:
             current_string.append(chr(inkey))
         display_box(screen, question + ": " + "".join(current_string),139,291)
@@ -212,8 +206,12 @@ def question_obj_create():
     list_question_2 = Question(["list2 = ['The', 'REaSON', 'your', 'CODE', 'iS', 'NOT', 'working today....']"," letter_1 = (list2[1])"," letter_2 = (list2[4])","print('The ' + letter_1[2] + letter_2[0] + ' has leveled up and is now in contol of computer 1.')"], "ai",LVL_1_PROMPT)
     list_question_3 = Question(["list3 = ['d1r0w', '0113h']"," list3.reverse()"," print(list3)"], "hello world", LVL_1_PROMPT)
     dict_question_1 = Question(["computer_1 = {"," 'user': 'Sean',"," 'folder': 9,"," 'oh no': 'enemy found'","}","print(computer_1.pop('oh no'))"], "enemy found", LVL_1_PROMPT)
-    dict_question_2 = Question(["player_skills = {","   'DigitalCrafts':{","      'programmer':{","         'name': 'sean',","         'skills':{","            'python': 70,","            'git and github': -1,","            'team work': 'Expert'","         }","       }","     }","   }"," print(player_skills['DigitalCrafts']['programmer']['name'])"], "sean","Last broken code\n")
-    lvl1_ques_arr = [list_question_1, list_question_2,list_question_3, dict_question_1, dict_question_2]
+
+    dict_question_2 = Question(["player_skills = {","   'DigitalCrafts':{","      'programmer':{","         'name': 'sean',","         'skills':{","            'python': 70,","            'git and github': -1,","            'team work': 'Expert'","         }","       }","     }","   }"," print(player_skills['DigitalCrafts']['programmer']['name'])"], "sean","Last broken code")
+    lvl1_ques_arr = [list_question_1,
+     list_question_2,list_question_3, dict_question_1, dict_question_2
+    ]
+
 
     #level 2 question initialization
     boolean_q_1 = Question(["if x __ 100:","    print(\"code\")","else:",    "print(\"you fail\")"], "==", LVL_2_PROMPT)
@@ -233,14 +231,16 @@ def question_obj_create():
     #Level 4 questions initialized
     question1 = Question(["___ add(num1, num2):","   return num1 + num2"],"def",LVL_4_PROMPT)
     question2 = Question(["def add(num1_ num2):","   return num1 + num2"],",",LVL_4_PROMPT)
-    question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"[",LVL_4_PROMPT)#won't work
-    question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],"]",LVL_4_PROMPT)#won't work
-    question5 = Question(["\ndef add(num1, num2)_","  return num1 + num2"],";",LVL_4_PROMPT)#won't work
-    question6 = Question(["\ndef add(num1, num2):"," ____return num1 + num2"],"    ",LVL_4_PROMPT)
-    question7 = Question(["\ndef add(num1, num2)_","  ______ num1 + num2\n"],"return",LVL_4_PROMPT)
-    question8 = Question(["\ndef add(__________):","    return num1 + num2\n"],"num1, num2",LVL_4_PROMPT)
-    question9 = Question(["\ndef add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)\n"],"add",LVL_4_PROMPT)
-    lvl4_ques_arr = [question1, question2, question3, question4, question5, question6, question7,question8, question9]
+
+    #question3 = Question(["\ndef add_num1, num2):","   return num1 + num2"],"[",LVL_4_PROMPT)#won't work
+    #question4 = Question(["\ndef add(num1, num2_:","   return num1 + num2"],"]",LVL_4_PROMPT)#won't work
+    #question5 = Question(["\ndef add(num1, num2)_","  return num1 + num2"],";",LVL_4_PROMPT)#won't work
+    question6 = Question(["def add(num1, num2):"," ____return num1 + num2"],"    ",LVL_4_PROMPT)
+    question7 = Question(["def add(num1, num2)_","  ______ num1 + num2"],"return",LVL_4_PROMPT)
+    question8 = Question(["def add(__________):","    return num1 + num2"],"num1, num2",LVL_4_PROMPT)
+    question9 = Question(["def add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)"],"add",LVL_4_PROMPT)
+    lvl4_ques_arr = [ question1, question2, question6, question7,question8, question9]
+
 
     #endgame question
     final_question = Question(["class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"],"self","Who can truly be the hero...? ")
