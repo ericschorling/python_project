@@ -332,13 +332,13 @@ while running:
         
         if first_run:
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["Error Errror Error... Something is going wrong", "This is DigitalCraft's AI D4v1D.....","If you can hear me press [ENTER]"])
+            narration_box.message_display(["Error Errror Error... Something is going wrong.", "This is DigitalCraft's AI D4v1D.....","If you can hear me press [ENTER]"])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
             narration_box.message_display(["D4v1d_AI: I am currently under attack.","Four of my databases have been compromised."])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["D4v1d_AI: You will need to use your", "prework skills to get the system back up.","Proceed upstairs to fix the first computer"])
+            narration_box.message_display(["D4v1d_AI: You will need to use your", "prework skills to get the system back up.","Proceed upstairs to fix the first computer."])
             pause_get_key()
             first_run = False
             
@@ -347,7 +347,7 @@ while running:
             narration_box.message_display(["D4v1d_AI: Well Done. ","You've unlocked the first computer.", "Head downstairs to unlock the second computer."])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["Keep your secret code", "You will use it to unlock the next computer."])
+            narration_box.message_display(["Keep your secret code.", "You will use it to unlock the next computer."])
             pause_get_key()
             first_comp = False
         if second_comp:
@@ -363,12 +363,12 @@ while running:
             narration_box.message_display(["David_AI: You're crushing it!!","You've unlocked the third computer!!"])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display([" The AI is hiding in another computer", "Head to the fourth computer to continue."])
+            narration_box.message_display([" The AI is hiding in another computer.", "Head to the fourth computer to continue."])
             pause_get_key()
             third_comp = False
         if fourth_comp:
             screen.blit(text_box_image,(0,0))
-            narration_box.message_display(["D4v1d_AI: The evil AI database has appeared","Let's head to the roof to shut it down."])
+            narration_box.message_display(["D4v1d_AI: The evil AI database has appeared.","Let's head to the roof to shut it down."])
             pause_get_key()
             screen.blit(text_box_image,(0,0))
             narration_box.message_display(["You'll need to use all your skills.", "It is just one more computer to shut it down."])
