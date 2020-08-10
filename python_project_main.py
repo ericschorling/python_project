@@ -213,9 +213,7 @@ def question_obj_create():
     list_question_3 = Question(["list3 = ['d1r0w', '0113h']"," list3.reverse()"," print(list3)"], "hello world", LVL_1_PROMPT)
     dict_question_1 = Question(["computer_1 = {"," 'user': 'Sean',"," 'folder': 9,"," 'oh no': 'enemy found'","}","print(computer_1.pop('oh no'))"], "enemy found", LVL_1_PROMPT)
     dict_question_2 = Question(["player_skills = {","   'DigitalCrafts':{","      'programmer':{","         'name': 'sean',","         'skills':{","            'python': 70,","            'git and github': -1,","            'team work': 'Expert'","         }","       }","     }","   }"," print(player_skills['DigitalCrafts']['programmer']['name'])"], "sean","Last broken code\n")
-    lvl1_ques_arr = [list_question_1,
-     list_question_2,list_question_3, dict_question_1, dict_question_2
-    ]
+    lvl1_ques_arr = [list_question_1, list_question_2,list_question_3, dict_question_1, dict_question_2]
 
     #level 2 question initialization
     boolean_q_1 = Question(["if x __ 100:","    print(\"code\")","else:",    "print(\"you fail\")"], "==", LVL_2_PROMPT)
@@ -242,7 +240,7 @@ def question_obj_create():
     question7 = Question(["\ndef add(num1, num2)_","  ______ num1 + num2\n"],"return",LVL_4_PROMPT)
     question8 = Question(["\ndef add(__________):","    return num1 + num2\n"],"num1, num2",LVL_4_PROMPT)
     question9 = Question(["\ndef add(num1, num2):","    return num1 + num2","sum = ___(1,1)","print(sum)\n"],"add",LVL_4_PROMPT)
-    lvl4_ques_arr = [ question1, question2, question3, question4, question5, question6, question7,question8, question9]
+    lvl4_ques_arr = [question1, question2, question3, question4, question5, question6, question7,question8, question9]
 
     #endgame question
     final_question = Question(["class Warrior(SEAN):","def__init__(****, all_powers)", "super().__init__(your_passion)","****.your_passion = your_passion"],"self","Who can truly be the hero...? ")
